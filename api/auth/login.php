@@ -10,12 +10,20 @@ $stmt->bindParam(':password', $password);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    session_start();
-    $_SESSION['username'] = $username;
-    //header("Location: index.php");
-    echo "hello";
-    exit();
+    // Login successful
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user_id = $row['user_id'];
+    
+    // Prepare JSON response
+    $response = array(
+        "success" => true,
+        "user_id" => $user_id
+    );
+    
+    // Send JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
 } else {
-    $error_message = "Incorrect username or password";
+    echo "Incorrect username or password";
 }
 ?>
