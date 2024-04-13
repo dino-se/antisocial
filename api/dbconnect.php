@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "";
+$database = "antisocial_db";
 
 try {
     $connection = new PDO("mysql:host=$servername;

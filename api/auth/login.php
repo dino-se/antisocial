@@ -1,15 +1,21 @@
 <?php
-$validUsername = 'user';
-$validPassword = 'password';
+include("../dbconnect.php");
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-if($username === $validUsername && $password === $validPassword) {
-    $response = array('success' => true);
+$stmt = $connection->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+$stmt->bindParam(':username', $username);
+$stmt->bindParam(':password', $password);
+$stmt->execute();
+
+if ($stmt->rowCount() > 0) {
+    session_start();
+    $_SESSION['username'] = $username;
+    //header("Location: index.php");
+    echo "hello";
+    exit();
 } else {
-    $response = array('success' => false);
+    $error_message = "Incorrect username or password";
 }
-header('Content-Type: application/json');
-echo json_encode($response);
 ?>
