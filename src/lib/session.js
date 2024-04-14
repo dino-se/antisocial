@@ -1,12 +1,12 @@
-function checkUserCookie() {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-        const [name, value] = cookie.split('=');
-        if (name === 'user_id' && value) {
-            return;
-        }
-    }
-    window.location.href = 'login.html';
+function deleteLocalStorageItem() {
+    localStorage.removeItem('user_id');
 }
 
-window.addEventListener('load', checkUserCookie);
+function checkUserLocalStorage() {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+        window.location.href = 'login.html';
+    }
+}
+
+window.addEventListener('load', checkUserLocalStorage);
