@@ -1,5 +1,6 @@
 function deleteLocalStorageItem() {
     localStorage.removeItem('user_id');
+    location.href = 'login.html';
 }
 
 function checkUserLocalStorage() {

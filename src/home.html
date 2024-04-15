@@ -75,7 +75,7 @@
             <li v-for="item in items" :key="item.id">
               <label>{{ item.fullname }}</label>
               <p>{{ item.content }}</p>
-              <a :href="'comment.html?post=' + item.post_id">Comment</a>
+              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
               <p class="border-b border-gray-300"></p>
           </li>
         </ul>

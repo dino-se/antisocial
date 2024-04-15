@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            items: []
+            comments: []
         }
     },
     mounted() {
@@ -13,10 +13,13 @@ const app = Vue.createApp({
             const postId = urlParams.get('post');
 
             console.error(postId);
+
             fetch(`../api/comment/getcomment.php?postid=${postId}`)
                 .then(response => response.json())
                 .then(data => {
-                    this.items = data;
+                    this.comments = data;
+
+                    console.log(data);
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);

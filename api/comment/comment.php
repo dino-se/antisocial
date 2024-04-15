@@ -1,14 +1,16 @@
 <?php
 include("../dbconnect.php");
 
+$postid = $_POST['postid'];
 $userid = $_POST['userid'];
-$content = $_POST['content'];
+$commenttext = $_POST['commenttext'];
 
-$query = "INSERT INTO comment(user_id, content)
-          VALUE (:userid, :content)";
+$query = "INSERT INTO comment(user_id, post_id, comment_text)
+          VALUE (:user_id, :post_id, :comment_text)";
 $stmt = $connection->prepare($query);
-$stmt->bindParam(':userid',$userid);
-$stmt->bindParam(':content',$content);
+$stmt->bindParam(':user_id',$userid);
+$stmt->bindParam(':post_id',$postid);
+$stmt->bindParam(':comment_text',$commenttext);
 $res = $stmt->execute();
 
 if ($res) {
