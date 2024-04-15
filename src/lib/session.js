@@ -10,3 +10,5 @@ function checkUserLocalStorage() {
 }
 
 window.addEventListener('load', checkUserLocalStorage);
+
+const userIdx = localStorage.getItem('user_id');

@@ -10,6 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="lib/session.js"></script>
+  <script src="lib/home.js" defer></script>
 </head>
 
 <body>
@@ -56,10 +57,21 @@
         <a class="btn btn-ghost text-lg">Homepage</a>
       </div>
 
+      <div>
+        <form id="postForm">
+          <input type="text" name="userid" id="userid">
+          <textarea name="content" id="" cols="100%" rows="2"></textarea>
+          <button class="bg-blue-800">POST</button>
+        </form>
+      </div>
+
       <div class="overflow-auto h-dvh scrollbar-hide">
 
         <div id="homepage">
-          <div class="w-fit px-5 border-b border-gray-300">
+          <ul>
+            <li v-for="item in items" :key="item.id" class="border-b border-gray-300">{{ item.content }}</li>
+        </ul>
+          <!-- <div class="w-fit px-5 border-b border-gray-300">
             <div class="card-body">
               <div class="avatar">
                 <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -82,7 +94,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
 
       </div>
@@ -125,6 +137,7 @@
   </div>
 
   <script src="lib/login.js"></script>
+  <script src="lib/post.js"></script>
 </body>
 
 </html>
