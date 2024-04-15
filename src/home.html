@@ -50,6 +50,9 @@
         <li>
           <button type="submit" onclick="deleteLocalStorageItem()">logout</button>
         </li>
+        <li>
+          <a href="profile.html">Profile</a>
+        </li>
       </ul>
     </div>
     <div class="flex-auto">
@@ -69,7 +72,12 @@
 
         <div id="homepage">
           <ul>
-            <li v-for="item in items" :key="item.id" class="border-b border-gray-300">{{ item.content }}</li>
+            <li v-for="item in items" :key="item.id">
+              <label>{{ item.fullname }}</label>
+              <p>{{ item.content }}</p>
+              <a :href="'comment.html?post=' + item.post_id">Comment</a>
+              <p class="border-b border-gray-300"></p>
+          </li>
         </ul>
           <!-- <div class="w-fit px-5 border-b border-gray-300">
             <div class="card-body">
