@@ -17,7 +17,14 @@
         <ul>
             <li v-for="item in comments" :key="item.id">
                 <label>{{ item.fullname }} - {{ item.created_at }}</label>
-                <p>{{ item.comment_text }}</p>
+                <button @click="editComment(item.comment_id)">Edit</button>
+                <button @click="deleteComment(item.comment_id)">Delete</button>
+                <p v-if="!item.isEditing">{{ item.comment_text }}</p>
+                <div v-else>
+                    <input v-model="item.editedComment">
+                    <button @click="saveEditedComment(item)">Save</button>
+                    <button @click="cancelEdit(item)">Cancel</button>
+                </div>
                 <p class="border-b border-gray-300"></p>
             </li>
         </ul>
@@ -27,7 +34,7 @@
         <form id="commentme">
             <input type="hidden" id="user_iddd" name="userid">
             <input type="hidden" id="post_iddd" name="postid">
-            <textarea name="commenttext" id="" cols="30" rows="2"></textarea>
+            <textarea name="commenttext" cols="30" rows="2"></textarea>
             <button>Comment</button>
         </form>
     </div>
@@ -79,6 +86,9 @@
                 alert('An error occurred. Please try again later.');
             });
         });
+
+
+        
     </script>
 </body>
 </html>
