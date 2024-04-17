@@ -38,14 +38,7 @@
           </a>
         </li>
         <li>
-          <a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            Create
-          </a>
+          <button onclick="x.showModal()">Create</button>
         </li>
         <li>
           <button type="submit" onclick="deleteLocalStorageItem()">logout</button>
@@ -60,22 +53,30 @@
         <a class="btn btn-ghost text-lg">Homepage</a>
       </div>
 
-      <div>
-        <form id="postForm">
-          <input type="text" name="userid" id="userid">
-          <textarea name="content" id="" cols="100%" rows="2"></textarea>
-          <button class="bg-blue-800">POST</button>
-        </form>
-      </div>
+      <dialog id="x" class="bg-blue-800">
+        <div>
+          <button onclick="x.close()">X</button>
+          <form id="postForm">
+            <input type="hidden" name="userid" id="userid">
+            <textarea name="content" cols="100%" rows="2"></textarea>
+            <input type="file">
+            <button class="bg-blue-800">POST</button>
+          </form>
+        </div>
+      </dialog>
 
       <div class="overflow-auto h-dvh scrollbar-hide">
 
         <div id="homepage">
           <ul>
             <li v-for="item in items" :key="item.id">
-              <label>{{ item.fullname }}</label>
+              <label>{{ item.fullname }} - {{ item.created_at}}</label>
               <p>{{ item.content }}</p>
-              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
+              <button>Like</button>
+              <button>
+                <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
+              </button>
+              <button>Share</button>
               <p class="border-b border-gray-300"></p>
           </li>
         </ul>
@@ -144,8 +145,8 @@
     </div>
   </div>
 
-  <script src="lib/login.js"></script>
-  <script src="lib/post.js"></script>
+  <script src="lib/services/login.js"></script>
+  <script src="lib/services/post.js"></script>
 </body>
 
 </html>

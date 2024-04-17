@@ -17,6 +17,10 @@
     </form>
 
     <script>
+        const userId = localStorage.getItem('user_id');
+        if (userId) {
+            window.location.href = 'home.html';
+        }
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(this);
