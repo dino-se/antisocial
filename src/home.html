@@ -73,7 +73,11 @@
         <div id="homepage">
           <ul>
             <li v-for="item in items" :key="item.id">
-              <label>{{ item.fullname }} - {{ item.created_at}}</label>
+
+              <label>
+                <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
+                - {{ item.created_at}}</label>
+
               <p>{{ item.content }}</p>
               <button>Like</button>
               <button>
