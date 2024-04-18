@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="lib/profile.js" defer></script>
+    <script src="lib/profile.js" async></script>
 </head>
 <body>
     <div id="profile">
         <img src="https://avatars.githubusercontent.com/u/133362311?v=4" alt="profile" width="100" height="100">
-        <label for="name">{{ items[0].fullname }}</label>
+        <label for="name">{{ items.fullname }}</label>
         <!-- <input type="text" v-model="items[0].user_id">
         <input type="text" v-model="suid"> -->
 
-        <button @click="followMe()">follow</button>
+        <div v-if="!cuser">
+            <button @click="followToggle()">
+                {{ following ? 'Unfollow' : 'Follow' }}
+            </button>    
+        </div>     
     </div>
 </body>
 </html>

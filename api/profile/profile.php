@@ -1,11 +1,15 @@
 <?php
+header('Content-type: application/json');
+
 include("../dbconnect.php");
 
 if(isset($_GET['uid'])) {
     $uid = $_GET['uid'];
 
     try {
-        $query = "SELECT * FROM users WHERE user_id = :uid";
+        $query = "SELECT * FROM users
+        LEFT JOIN followers ON users.user_id = followers.follower_id
+        WHERE user_id = :uid";
         $stmt = $connection->prepare($query);
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();
