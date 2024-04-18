@@ -9,8 +9,7 @@ const app = Vue.createApp({
     },
     methods: {
         fetchComment() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('post');
+            const postId = new URLSearchParams(window.location.search).get('post');
 
             fetch(`../api/comment/getcomment.php?postid=${postId}`)
                 .then(response => response.json())
