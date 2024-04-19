@@ -6,11 +6,10 @@ include("../dbconnect.php");
 $fuid = $_GET['fuid'];
 
 try {
-    $query = "SELECT *
-              FROM post 
+    $query = "SELECT * FROM post 
               INNER JOIN users ON post.user_id = users.user_id 
               LEFT JOIN followers ON post.user_id = followers.following_id
-              WHERE followers.follower_id = :fuid
+              WHERE followers.follower_id = :fuid OR users.user_id = :fuid
               GROUP BY post.post_id
               ORDER BY post.post_id DESC";
     $stmt = $connection->prepare($query);

@@ -2,11 +2,11 @@ const app = Vue.createApp({
     data() {
         return {
             items: [],
-            following: false,
-            cuser: false
+            following: "",
+            cuser: false,
         }
     },
-    created() {
+    mounted() {
         const suid = localStorage.getItem('user_id');
         const uid = new URLSearchParams(window.location.search).get('uid');
 
@@ -18,6 +18,11 @@ const app = Vue.createApp({
         .then(response => response.json())
         .then(data => {
             this.items = data[0];
+        })
+
+        fetch(`../api/profile/profile.php?uid=${suid}`)
+        .then(response => response.json())
+        .then(data => {
             //console.error(data.length);
             for (let i = 0; i < data.length; i++) {
                 // console.error(data[i].following_id);
