@@ -2,6 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             items: [],
+            mepost: [],
             following: "",
             cuser: false,
         }
@@ -13,6 +14,8 @@ const app = Vue.createApp({
         if(uid == suid) {
             this.cuser = true;
         }
+
+        this.fetchMePost();
 
         fetch(`../api/profile/profile.php?uid=${uid}`)
         .then(response => response.json())
@@ -51,7 +54,21 @@ const app = Vue.createApp({
                     this.following = true;
                 });
             }
-        }        
+        },
+
+        fetchMePost() {
+
+            const fuid = new URLSearchParams(window.location.search).get('uid');
+
+            fetch(`../api/content/getpost.php?fuid=${fuid}`)
+            .then((response) => response.json())
+            .then((data) => {
+              this.mepost = data;
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        }
     }
 });
 
