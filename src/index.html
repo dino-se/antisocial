@@ -59,7 +59,7 @@
                 <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
                 - {{ item.created_at}}
                 <button onclick="x.showModal()">Edit</button>
-                <button>Delete</button>
+                <button @click="deletePost(item.post_id)">Delete</button>
               </label>
 
               <p>{{ item.content }}</p>
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-  <script src="lib/services/login.js"></script>
+  <!-- <script src="lib/services/login.js"></script> -->
   <script src="lib/services/post.js"></script>
 </body>
 

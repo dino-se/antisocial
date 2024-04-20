@@ -19,7 +19,14 @@ const app = Vue.createApp({
           console.error("Error fetching data:", error);
         });
     },
-  },
+    deletePost(id) {
+      fetch(`../api/content/delete_post.php?id=${id}`)
+          .then(() => {
+              location.reload();
+          });
+  }
+
+  }
 });
 
 app.mount("#homepage");
