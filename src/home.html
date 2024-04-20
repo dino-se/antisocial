@@ -62,7 +62,9 @@
           <form id="postForm">
             <input type="hidden" name="userid" id="userid">
             <textarea name="content" cols="100%" rows="2"></textarea>
-            <input type="file">
+            <div>
+              <input type="file" accept="image/*" multiple>
+            </div>
             <button class="bg-blue-800">POST</button>
           </form>
         </div>
@@ -76,7 +78,10 @@
 
               <label>
                 <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
-                - {{ item.created_at}}</label>
+                - {{ item.created_at}}
+                <button>Edit</button>
+                <button>Delete</button>
+              </label>
 
               <p>{{ item.content }}</p>
               <button>Like</button>

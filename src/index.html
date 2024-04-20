@@ -1,73 +1,89 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASocial</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.css"/>
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <ul>
-                <li><strong>ASocial</strong></li>
-            </ul>
-            <ul>
-                <li><a href="#" class="contrast">About</a></li>
-                <li><a href="#" class="contrast">Services</a></li>
-                <li><a href="#" class="contrast">Products</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="container">
-        <button onclick="addPost.showModal()">Add Article</button>
-        <div>
-            <h2>Article:</h2>
-           <center>
-            <div>
-                <article style="width: 50%;">
-                    <header>Example Article</header>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis nobis mollitia veritatis ea officia
-                        accusamus aliquid molestiae exercitationem reprehenderit quod, saepe aliquam quidem vero est
-                        sapiente facilis. Dolorem, delectus quas?</p>
-                    <img src="https://avatars.githubusercontent.com/u/133362311?v=4" alt="">
-                    <button class="outline secondary">Delete Article</button>
-                    <button class="outline contrast">Edit Article</button>
-                </article>
-                <article style="width: 50%;">
-                    <header>Example Article</header>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis nobis mollitia veritatis ea officia
-                        accusamus aliquid molestiae exercitationem reprehenderit quod, saepe aliquam quidem vero est
-                        sapiente facilis. Dolorem, delectus quas?</p>
-                    <img src="https://avatars.githubusercontent.com/u/133362311?v=4" alt="">
-                    <button class="outline secondary">Delete Article</button>
-                    <button class="outline contrast">Edit Article</button>
-                </article>
-            </div>
-           </center>
-        </div>
-    </div>
 
-    <dialog id="addPost">
-        <article>
-            <header>
-                <button aria-label="Close" rel="prev" onclick="addPost.close()"></button>
-                <p>
-                    <strong>🗓️ Thank You for Registering!</strong>
-                </p>
-            </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="assets/css/index.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="lib/session.js"></script>
+  <script src="lib/home.js" defer></script>
+  <script src="lib/nav.js" defer></script>
+</head>
+
+<body>
+  <div class="flex h-screen overflow-hidden">
+    <div class="flex-none w-80 border-r border-gray-300">
+      <ul class="menu text-2xl place-content-center pt-5">
+        <div id="nav">
+          <li>
+            <button onclick="x.showModal()">Create</button>
+          </li>
+          <li>
+            <button type="submit" onclick="deleteLocalStorageItem()">logout</button>
+          </li>
+          <li>
+            <a :href="'profile.html?uid='+uid">Profile</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div class="flex-auto">
+      <div class="navbar bg-base-100 border-b border-gray-300">
+        <a class="btn btn-ghost text-lg">Homepage</a>
+      </div>
+
+      <dialog id="x" class="bg-blue-200">
+        <div>
+          <button onclick="x.close()">X</button>
+          <form id="postForm">
+            <input type="hidden" name="userid" id="userid">
+            <textarea name="content" cols="100%" rows="2"></textarea>
             <div>
-                <form action="" method="POST">
-                    <h1>New Article</h1>
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" />
-                    <label for="title">Title</label>
-                    <textarea name="content" id="content" rows={5} /> </textarea>
-                    <input type="file" />
-                    <button type="submit">Add Article</button>
-                </form>
+              <input type="file" accept="image/*" multiple>
             </div>
-        </article>
-    </dialog>
+            <button class="bg-blue-800">POST</button>
+          </form>
+        </div>
+      </dialog>
+
+      <div class="overflow-auto h-dvh scrollbar-hide">
+
+        <div id="homepage">
+          <ul>
+            <li v-for="item in items" :key="item.id">
+
+              <label>
+                <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
+                - {{ item.created_at}}
+                <button onclick="x.showModal()">Edit</button>
+                <button>Delete</button>
+              </label>
+
+              <p>{{ item.content }}</p>
+              <button>Like</button>
+              <button>
+                <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
+              </button>
+              <button>Share</button>
+              <p class="border-b border-gray-300"></p>
+          </li>
+        </ul>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="flex-none w-64 border-l border-gray-300">
+      <a class="btn btn-ghost text-lg">Suggestions</a>
+
+    </div>
+  </div>
+
+  <script src="lib/services/login.js"></script>
+  <script src="lib/services/post.js"></script>
 </body>
-</html> -->
+
+</html>

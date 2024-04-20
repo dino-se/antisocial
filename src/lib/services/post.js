@@ -9,8 +9,8 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         body: formData
     })
     .then(response => response.json())
-    .then(data => {
-
+    .then(() => {
+        location.reload();
     })
     .catch(error => {
         console.error('Error:', error);
