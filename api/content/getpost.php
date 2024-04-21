@@ -10,6 +10,7 @@ try {
     $query = "SELECT * FROM post 
               INNER JOIN users ON post.user_id = users.user_id 
               LEFT JOIN followers ON post.user_id = followers.following_id
+              LEFT JOIN image ON image.image_uid = post.image_uid 
               WHERE followers.follower_id = :fuid OR users.user_id = :muid
               GROUP BY post.post_id
               ORDER BY post.post_id DESC";

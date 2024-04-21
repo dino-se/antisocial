@@ -20,6 +20,8 @@ function handleFileSelect(event) {
     .then(response => response.json())
     .then(data => {
         console.log(data);
+
+        document.getElementById('imguid').value = data.img_uid;
     })
     .catch(error => {
         console.error('Error:', error);

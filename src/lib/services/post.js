@@ -10,6 +10,7 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
     })
     .then(response => response.json())
     .then(() => {
+        clearMind();
         location.reload();
     })
     .catch(error => {
@@ -17,3 +18,7 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
         alert('An error occurred. Please try again later.');
     });
 });
+
+function clearMind() {
+    document.getElementById("postForm").reset();
+}

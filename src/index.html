@@ -35,11 +35,12 @@
         <a class="btn btn-ghost text-lg">Homepage</a>
       </div>
 
-      <dialog id="x" class="bg-blue-200">
+      <dialog id="x" onclose="clearMind()" class="bg-blue-200">
         <div>
-          <button onclick="x.close()">X</button>
+          <button onclick="x.close();">X</button>
           <form id="postForm">
             <input type="hidden" name="userid" id="userid">
+            <input type="hidden" name="imguid" id="imguid">
             <textarea name="content" cols="100%" rows="2"></textarea>
             <div>
               <input type="file" id="fileInput" name="img[]" accept="image/*" multiple>
