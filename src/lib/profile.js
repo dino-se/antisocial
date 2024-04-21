@@ -58,9 +58,9 @@ const app = Vue.createApp({
 
         fetchMePost() {
 
-            const fuid = new URLSearchParams(window.location.search).get('uid');
+            const muid = new URLSearchParams(window.location.search).get('uid');
 
-            fetch(`../api/content/getpost.php?fuid=${fuid}`)
+            fetch(`../api/content/getpost.php?muid=${muid}`)
             .then((response) => response.json())
             .then((data) => {
               this.mepost = data;

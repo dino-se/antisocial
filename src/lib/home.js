@@ -10,7 +10,7 @@ const app = Vue.createApp({
   methods: {
     fetchData() {
       const cuid = localStorage.getItem('user_id');
-      fetch(`../api/content/getpost.php?fuid=${cuid}`)
+      fetch(`../api/content/getpost.php?fuid=${cuid}&muid=${cuid}`)
         .then((response) => response.json())
         .then((data) => {
           this.items = data;
