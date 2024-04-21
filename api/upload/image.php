@@ -2,6 +2,7 @@
 include("../dbconnect.php");
 
 $user_id = 13;
+$img_uid = mt_rand(10000000000, 99999999999);
 $files = $_FILES['img'];
 
 try {
@@ -16,17 +17,18 @@ try {
         $uploaded_files[] = $target_file;
     }
 
-    $query = "INSERT INTO image (user_id, filename) VALUES (:user_id, :file)";
+    $query = "INSERT INTO image (user_id, filename, image_uid) VALUES (:user_id, :file, :image_uid)";
     $statement = $connection->prepare($query);
 
     foreach ($uploaded_files as $file) {
         $statement->bindParam(':user_id', $user_id);
         $statement->bindParam(':file', $file);
+        $statement->bindParam(':image_uid', $getid);
         $res = $statement->execute();
     }
 
     if ($res) {
-        echo json_encode(['res' => 'success']);
+        echo json_encode(['res' => 'success', 'img_uid' => $getid]);
     } else {
         echo json_encode(['res' => 'error']);
     }
