@@ -42,7 +42,7 @@
             <input type="hidden" name="userid" id="userid">
             <textarea name="content" cols="100%" rows="2"></textarea>
             <div>
-              <input type="file" accept="image/*" multiple>
+              <input type="file" id="fileInput" name="img[]" accept="image/*" multiple>
             </div>
             <button class="bg-blue-800">POST</button>
           </form>
@@ -84,6 +84,7 @@
 
   <!-- <script src="lib/services/login.js"></script> -->
   <script src="lib/services/post.js"></script>
+  <script src="lib/services/upload.js"></script>
 </body>
 
 </html>
