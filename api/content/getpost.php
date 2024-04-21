@@ -3,8 +3,8 @@ header('Content-type: application/json');
 
 include("../dbconnect.php");
 
-$fuid = $_GET['fuid'];
-$muid = $_GET['muid'] ?? null;
+$muid = $_GET['muid'];
+$fuid = $_GET['fuid'] ?? null;
 
 try {
     $query = "SELECT * FROM post 

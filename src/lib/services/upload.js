@@ -4,11 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function handleFileSelect(event) {
     const files = event.target.files;
+    const uid = localStorage.getItem('user_id');
     const formData = new FormData();
 
     for (let i = 0; i < files.length; i++) {
         formData.append('img[]', files[i]);
     }
+
+    formData.append('uid', uid);
 
     fetch('../api/upload/image.php', {
         method: 'POST',
