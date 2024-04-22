@@ -7,7 +7,10 @@ $muid = $_GET['muid'];
 $fuid = $_GET['fuid'] ?? null;
 
 try {
-    $query = "SELECT post.*, users.*, image.* FROM post 
+    $query = "SELECT post.*,
+              users.user_id, users.fullname, users.username, 
+              image.filename, image.image_uid
+              FROM post 
               INNER JOIN users ON post.user_id = users.user_id 
               LEFT JOIN followers ON post.user_id = followers.following_id
               LEFT JOIN image ON image.image_uid = post.image_uid 

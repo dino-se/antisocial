@@ -23,23 +23,28 @@
         <div>
             <ul>
                 <li v-for="item in mepost" :key="item.id">
-    
                   <label>
                     <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
                     - {{ item.created_at}}
                     <button onclick="x.showModal()">Edit</button>
                     <button @click="deletePost(item.post_id)">Delete</button>
-                  </label>
-    
+                  </label>  
                   <p>{{ item.content }}</p>
+                  
+                  <template v-if="item.filenames && item.filenames.length > 0">
+                    <template v-for="(filename, index) in item.filenames">
+                      <img v-if="filename" :src="'..' + filename" :key="index" alt="" width="600" height="400">
+                    </template>
+                  </template>
+                  
                   <button>Like</button>
                   <button>
                     <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
                   </button>
                   <button>Share</button>
                   <p class="border-b border-gray-300"></p>
-              </li>
-            </ul>
+                </li>
+              </ul>
         </div>
     </div>
 </body>
