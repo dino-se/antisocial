@@ -63,8 +63,10 @@
               </label>  
               <p>{{ item.content }}</p>
               
-              <template v-for="(filename, index) in item.filenames">
-                <img :src="'..' + filename" :key="index" alt="" width="600" height="400">
+              <template v-if="item.filenames && item.filenames.length > 0">
+                <template v-for="(filename, index) in item.filenames">
+                  <img v-if="filename" :src="'..' + filename" :key="index" alt="" width="600" height="400">
+                </template>
               </template>
               
               <button>Like</button>
