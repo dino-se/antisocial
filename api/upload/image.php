@@ -13,7 +13,7 @@ try {
         $target_file = '../public/img/' . $filename;
         move_uploaded_file($files["tmp_name"][$key], $target_file);
 
-        $target_file = str_replace("../", "", $target_file);
+        $target_file = str_replace("../", "/api/", $target_file);
         $uploaded_files[] = $target_file;
     }
 
