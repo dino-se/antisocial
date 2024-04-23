@@ -60,7 +60,7 @@ const app = Vue.createApp({
 
             const muid = new URLSearchParams(window.location.search).get('uid');
 
-            fetch(`../api/content/getpost.php?muid=${muid}`)
+            fetch(`../api/content/get_content.php?muid=${muid}`)
             .then((response) => response.json())
             .then((data) => {
               this.mepost = data;

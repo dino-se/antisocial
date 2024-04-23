@@ -5,12 +5,12 @@ const app = Vue.createApp({
     };
   },
   mounted() {
-    this.fetchData();
+    this.fetchPost();
   },
   methods: {
-    fetchData() {
+    fetchPost() {
       const cuid = localStorage.getItem('user_id');
-      fetch(`../api/content/getpost.php?fuid=${cuid}&muid=${cuid}`)
+      fetch(`../api/content/get_content.php?fuid=${cuid}&cuid=${cuid}`)
         .then((response) => response.json())
         .then((data) => {
           this.items = data;
@@ -20,7 +20,7 @@ const app = Vue.createApp({
         });
     },
     deletePost(id) {
-      fetch(`../api/content/delete_post.php?id=${id}`)
+      fetch(`../api/content/delete_content.php?post_id=${id}`)
           .then(() => {
               location.reload();
           });

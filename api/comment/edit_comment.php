@@ -1,15 +1,15 @@
 <?php
 include("../dbconnect.php");
 
-$id = $_GET['id'];
-$name = $_GET['comment'];
+$cmntid = $_GET['id'];
+$cmnttxt = $_GET['comment'];
 
 try {
-    $query = "UPDATE comment SET comment_text = :name WHERE comment_id = :id";
-    $statement = $connection->prepare($query);
-    $statement->bindParam(':id', $id);
-    $statement->bindParam(':name', $name);
-    $statement->execute();
+    $query = "UPDATE comment SET comment_text = :cmnttxt WHERE comment_id = :cmntid";
+    $stmt = $connection->prepare($query);
+    $stmt->bindParam(':cmntid', $cmntid);
+    $stmt->bindParam(':cmnttxt', $cmnttxt);
+    $stmt->execute();
 
     echo json_encode(["res" => "success"]);
 } catch(PDOException $th) {

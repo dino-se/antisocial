@@ -4,7 +4,7 @@ document.getElementById("userid").value = userId;
 document.getElementById('postForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const formData = new FormData(this);
-    fetch('../api/content/post.php', {
+    fetch('../api/content/post_content.php', {
         method: 'POST',
         body: formData
     })

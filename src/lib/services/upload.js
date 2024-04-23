@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+    document.getElementById('fileInput').addEventListener('change', handleFileUpload);
 });
 
-function handleFileSelect(event) {
+function handleFileUpload(event) {
     const files = event.target.files;
     const uid = localStorage.getItem('user_id');
     const formData = new FormData();
@@ -13,7 +13,7 @@ function handleFileSelect(event) {
 
     formData.append('uid', uid);
 
-    fetch('../api/upload/image.php', {
+    fetch('../api/content/upload_content.php', {
         method: 'POST',
         body: formData
     })
