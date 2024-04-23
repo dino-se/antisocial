@@ -8,7 +8,7 @@ include("../dbconnect.php");
 
     try {
         $query = "SELECT * FROM users
-        LEFT JOIN followers ON users.user_id = followers.follower_id
+        LEFT JOIN follows ON users.user_id = follows.follower_id
         WHERE user_id = :uid";
         $stmt = $connection->prepare($query);
         $stmt->bindParam(':uid', $uid);

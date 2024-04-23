@@ -5,7 +5,7 @@ include("../dbconnect.php");
 $follower_id = $_GET['uid'];
 $following_id = $_GET['suid'];
 
-$query = "DELETE FROM followers
+$query = "DELETE FROM follows
           WHERE follower_id = $follower_id AND following_id = $following_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();

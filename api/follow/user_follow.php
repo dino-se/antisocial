@@ -4,7 +4,7 @@ include("../dbconnect.php");
 $follower_id = $_GET['uid'];
 $following_id = $_GET['suid'];
 
-$query = "INSERT INTO followers (follower_id, following_id)
+$query = "INSERT INTO follows (follower_id, following_id)
           VALUES (:follower_id, :following_id)";
 $stmt = $connection->prepare($query);
 $stmt->bindParam(':follower_id', $follower_id);
