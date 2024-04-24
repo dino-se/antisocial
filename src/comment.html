@@ -6,6 +6,7 @@
     <title>Comment</title>
     <script src="lib/session.js" async></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="lib/comment.js" defer></script>
 </head>
 <body>
@@ -14,33 +15,41 @@
 
     <a href="index.html">X</a>
 
-    <div id="comment">
-        <ul>
-            <li v-for="item in comments" :key="item.id">
-                <label>{{ item.fullname }} - {{ item.created_at }}</label>
-
-                <template v-if="item.user_id == owner">
-                    <button @click="editComment(item.comment_id)">Edit</button>
-                    <button @click="deleteComment(item.comment_id)">Delete</button>
-                </template>
-                <p v-if="!item.isEditing">{{ item.comment_text }}</p>
-                <div v-else>
-                    <input v-model="item.editedComment">
-                    <button @click="saveEditedComment(item)">Save</button>
-                    <button @click="cancelEdit(item)">Cancel</button>
-                </div>
-                <p class="border-b border-gray-300"></p>
-            </li>
-        </ul>
-    </div>    
-
-    <div>
-        <form id="commentme">
-            <input type="hidden" id="user_iddd" name="userid">
-            <input type="hidden" id="post_iddd" name="postid">
-            <textarea name="commenttext" cols="30" rows="2"></textarea>
-            <button>Comment</button>
-        </form>
+    <div class="flex h-screen overflow-hidden">
+        <div class="flex-auto">
+            
+        </div>
+    
+        <div class="flex-auto">
+            <div id="comment">
+                <ul>
+                    <li v-for="item in comments" :key="item.id">
+                        <label>{{ item.fullname }} - {{ item.created_at }}</label>
+    
+                        <template v-if="item.user_id == owner">
+                            <button @click="editComment(item.comment_id)">Edit</button>
+                            <button @click="deleteComment(item.comment_id)">Delete</button>
+                        </template>
+                        <p v-if="!item.isEditing">{{ item.comment_text }}</p>
+                        <div v-else>
+                            <input v-model="item.editedComment">
+                            <button @click="saveEditedComment(item)">Save</button>
+                            <button @click="cancelEdit(item)">Cancel</button>
+                        </div>
+                        <p class="border-b border-gray-300"></p>
+                    </li>
+                </ul>
+            </div>
+    
+            <div>
+                <form id="commentme">
+                    <input type="hidden" id="user_iddd" name="userid">
+                    <input type="hidden" id="post_iddd" name="postid">
+                    <textarea name="commenttext" cols="30" rows="2"></textarea>
+                    <button>Comment</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
