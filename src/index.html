@@ -53,14 +53,20 @@
 
         <div id="homepage">
           <ul>
-            <li v-for="item in items" :key="item.id">
+            <li v-for="item in contents" :key="item.id">
               <label>
                 <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
                 - {{ item.created_at}}
-                <button onclick="x.showModal()">Edit</button>
+                <button @click="editContent(item.post_id)">Edit</button>
                 <button @click="deletePost(item.post_id)">Delete</button>
               </label>  
-              <p>{{ item.content }}</p>
+
+              <p v-if="!item.isEditing">{{ item.content }}</p>
+                <div v-else>
+                    <input v-model="item.editedContent">
+                    <button @click="saveEditedContent(item)">Save</button>
+                    <button @click="cancelEditContent(item)">Cancel</button>
+                </div>
               
               <template v-if="item.filenames && item.filenames.length > 0">
                 <template v-for="(filename, index) in item.filenames">
