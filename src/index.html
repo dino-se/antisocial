@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <link rel="stylesheet" href="assets/css/index.css">
+  <script src="lib/session.js" async></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="lib/session.js"></script>
   <script src="lib/home.js" defer></script>
   <script src="lib/nav.js" defer></script>
 </head>
@@ -22,7 +22,7 @@
             <button onclick="x.showModal()">Create</button>
           </li>
           <li>
-            <button type="submit" onclick="deleteLocalStorageItem()">logout</button>
+            <button type="submit" onclick="signoutUser()">logout</button>
           </li>
           <li>
             <a :href="'profile.html?uid='+uid">Profile</a>
@@ -39,7 +39,6 @@
         <div>
           <button onclick="x.close();">X</button>
           <form id="postForm">
-            <input type="hidden" name="userid" id="userid">
             <input type="hidden" name="imguid" id="imguid">
             <textarea name="content" cols="100%" rows="2"></textarea>
             <div>

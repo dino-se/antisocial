@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Signup</title>
 </head>
 <body>
-    <a href="login.html">Login</a>
     <h2>Signup</h2>
     <form id="signupForm">
         <label for="email">Email:</label>
@@ -17,30 +16,17 @@
         <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
+        <div>
+            <a href="signin.html">Login</a>
+        </div>
     </form>
 
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('../api/auth/signup.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    alert('Login successful!');
-                } else {
-                    alert('Login failed. Please check your username and password.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again later.');
-            });
-        });
-    </script>
+    <dialog id="s">
+        <p>You have successfully registered</p>
+        <a href="signin.html">Login</a>
+    </dialog>
+
+    <script src="lib/services/signup.js"></script>
 </body>
 </html>

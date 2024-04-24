@@ -1,15 +1,13 @@
-function deleteLocalStorageItem() {
-    localStorage.removeItem('user_id');
-    location.href = 'login.html';
-}
+window.addEventListener('load', youExist);
 
-function checkUserLocalStorage() {
-    const userId = localStorage.getItem('user_id');
-    if (!userId) {
-        window.location.href = 'login.html';
+function youExist() {
+    const userIdx = localStorage.getItem('user_id');
+    if (!userIdx) {
+        window.location.href = 'signin.html';
     }
 }
 
-window.addEventListener('load', checkUserLocalStorage);
-
-const userIdx = localStorage.getItem('user_id');
+function signoutUser() {
+    localStorage.removeItem('user_id');
+    location.href = 'signin.html';
+}
