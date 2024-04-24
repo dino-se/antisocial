@@ -1,6 +1,4 @@
 <?php
-header('Content-type: application/json');
-
 include("../dbconnect.php");
 
 if(isset($_GET['uid'])) {
@@ -14,6 +12,8 @@ if(isset($_GET['uid'])) {
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        header('Content-type: application/json');
         echo json_encode($result);
     } catch (PDOException $th) {
         echo json_encode(['error' => $th->getMessage()]);

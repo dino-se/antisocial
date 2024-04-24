@@ -1,6 +1,4 @@
 <?php
-header('Content-type: application/json');
-
 include("../dbconnect.php");
 
 if(isset($_GET['cuid'])) {
@@ -35,6 +33,8 @@ if(isset($_GET['cuid'])) {
             unset($groupedResult[$postId]['image_id']);
         }
         $finalResult = array_values($groupedResult);
+
+        header('Content-type: application/json');
         echo json_encode($finalResult);
     } catch (PDOException $th) {
         echo json_encode(['error' => $th->getMessage()]);
