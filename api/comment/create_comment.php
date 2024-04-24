@@ -8,8 +8,8 @@ if(isset($_POST['postid']) && isset($_POST['userid'])) {
 
     try {
         $query = "INSERT INTO comment(user_id, post_id, comment_text)
-                VALUE (:user_id, :post_id, :comment_text)";
-        $stmt = $connection->prepare($query);
+                  VALUE (:user_id, :post_id, :comment_text)";
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(':user_id',$userid);
         $stmt->bindParam(':post_id',$postid);
         $stmt->bindParam(':comment_text',$cmnttext);
@@ -18,12 +18,14 @@ if(isset($_POST['postid']) && isset($_POST['userid'])) {
         if ($res) {
             echo json_encode(['res' => 'success']);
         } else {
-            echo json_encode(['res' => 'error']);
+            echo json_encode(['res' => 'error',
+                              'message' => 'Something went wrong']);
         }
     } catch (PDOException $th) {
         echo json_encode(['error' => $th->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => 'postid parameter is missing']);
+    echo json_encode(['error' => 'Missing reference']);
 }
+
 ?>

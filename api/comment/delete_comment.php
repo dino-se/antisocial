@@ -1,22 +1,27 @@
 <?php
+
 include("../dbconnect.php");
 
-$commentid = $_GET['id'];
+if(isset($_GET['cid'])) {
+    $commentid = $_GET['cid'];
 
-try {
-    $query = "DELETE FROM comment WHERE comment_id = $commentid";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
+    try {
+        $query = "DELETE FROM comment WHERE comment_id = $commentid";
+        $stmt = $conn->prepare($query);
+        $res = $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
-        echo json_encode(['res' => 'success']);
-    } else {
-        echo json_encode(['res' => 'error',
-                          'message' => 'Invalid request']);
+        if ($res) {
+            echo json_encode(['res' => 'success']);
+        } else {
+            echo json_encode(['res' => 'error',
+                              'message' => 'Invalid request']);
+        }
+
+    } catch (PDOException $th) {
+        echo json_encode(['error' => $th->getMessage()]);
     }
-
-} catch (PDOException $th) {
-    echo json_encode(['error' => $th->getMessage()]);
+} else {
+    echo json_encode(['error' => 'Missing reference']);
 }
 
 ?>

@@ -11,7 +11,7 @@ const app = Vue.createApp({
         fetchComment() {
             const postId = new URLSearchParams(window.location.search).get('post');
 
-            fetch(`../api/comment/getcomment.php?postid=${postId}`)
+            fetch(`../api/comment/get_comment.php?postid=${postId}`)
                 .then(response => response.json())
                 .then(data => {
                     this.comments = data.map(comment => ({
@@ -40,14 +40,14 @@ const app = Vue.createApp({
         },
 
         saveEditedComment(item) {
-            fetch(`../api/comment/edit_comment.php?id=${item.comment_id}&comment=${item.editedComment}`)
+            fetch(`../api/comment/edit_comment.php?cid=${item.comment_id}&comment=${item.editedComment}`)
                 .then(() => {
                     location.reload();
                 });
         },
 
         deleteComment(id) {
-            fetch(`../api/comment/delete_comment.php?id=${id}`)
+            fetch(`../api/comment/delete_comment.php?cid=${id}`)
                 .then(() => {
                     location.reload();
                 });

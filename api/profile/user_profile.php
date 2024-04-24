@@ -3,14 +3,14 @@ header('Content-type: application/json');
 
 include("../dbconnect.php");
 
-// if(isset($_GET['uid'])) {
+if(isset($_GET['uid'])) {
     $uid = $_GET['uid'];
 
     try {
         $query = "SELECT * FROM users
-        LEFT JOIN followers ON users.user_id = followers.follower_id
-        WHERE user_id = :uid";
-        $stmt = $connection->prepare($query);
+                  LEFT JOIN follows ON users.user_id = follows.follower_id
+                  WHERE user_id = :uid";
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,8 @@ include("../dbconnect.php");
     } catch (PDOException $th) {
         echo json_encode(['error' => $th->getMessage()]);
     }
-// } else {
-//     echo json_encode(['error' => 'postid parameter is missing']);
-// }
+} else {
+    echo json_encode(['error' => 'Missing reference']);
+}
+
 ?>

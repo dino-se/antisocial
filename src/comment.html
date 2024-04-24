@@ -73,7 +73,7 @@
         document.getElementById('commentme').addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(this);
-            fetch('../api/comment/comment.php', {
+            fetch('../api/comment/create_comment.php', {
                 method: 'POST',
                 body: formData
             })

@@ -6,14 +6,12 @@ if(isset($_GET['uid']) && isset($_GET['suid'])) {
     $following_id = $_GET['suid'];
 
     try {
-        $query = "INSERT INTO follows (follower_id, following_id)
-                  VALUES (:follower_id, :following_id)";
+        $query = "DELETE FROM follows
+                  WHERE follower_id = $follower_id AND following_id = $following_id";
         $stmt = $conn->prepare($query);
-        $stmt->bindParam(':follower_id', $follower_id);
-        $stmt->bindParam(':following_id', $following_id);
-        $res = $stmt->execute();
+        $stmt->execute();
 
-        if ($res) {
+        if ($stmt->rowCount() > 0) {
             echo json_encode(['res' => 'success']);
         } else {
             echo json_encode(['res' => 'error']);

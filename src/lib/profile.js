@@ -17,13 +17,13 @@ const app = Vue.createApp({
 
         this.fetchMePost();
 
-        fetch(`../api/profile/profile.php?uid=${uid}`)
+        fetch(`../api/follow/get_follow.php?uid=${uid}`)
         .then(response => response.json())
         .then(data => {
             this.items = data[0];
         })
 
-        fetch(`../api/profile/profile.php?uid=${suid}`)
+        fetch(`../api/follow/get_follow.php?uid=${suid}`)
         .then(response => response.json())
         .then(data => {
             //console.error(data.length);
@@ -44,12 +44,12 @@ const app = Vue.createApp({
             const fuid = new URLSearchParams(window.location.search).get('uid');
         
             if (this.following) {
-                fetch(`../api/follow/unfollow.php?uid=${fsuid}&suid=${fuid}`)
+                fetch(`../api/follow/remove_follow.php?uid=${fsuid}&suid=${fuid}`)
                 .then(() => {
                     this.following = false;
                 });
             } else {
-                fetch(`../api/follow/follow.php?uid=${fsuid}&suid=${fuid}`)
+                fetch(`../api/follow/user_follow.php?uid=${fsuid}&suid=${fuid}`)
                 .then(() => {
                     this.following = true;
                 });
@@ -60,7 +60,7 @@ const app = Vue.createApp({
 
             const muid = new URLSearchParams(window.location.search).get('uid');
 
-            fetch(`../api/content/get_content.php?muid=${muid}`)
+            fetch(`../api/content/get_content.php?cuid=${muid}`)
             .then((response) => response.json())
             .then((data) => {
               this.mepost = data;
