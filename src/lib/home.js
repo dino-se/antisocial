@@ -2,10 +2,12 @@ const app = Vue.createApp({
     data() {
         return {
             contents: [],
+            curuser: ""
         };
     },
     mounted() {
         this.fetchPost();
+        this.curuser = localStorage.getItem('user_id');
     },
      methods: {
         fetchPost() {

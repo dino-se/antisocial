@@ -18,8 +18,11 @@
         <ul>
             <li v-for="item in comments" :key="item.id">
                 <label>{{ item.fullname }} - {{ item.created_at }}</label>
-                <button @click="editComment(item.comment_id)">Edit</button>
-                <button @click="deleteComment(item.comment_id)">Delete</button>
+
+                <template v-if="item.user_id == owner">
+                    <button @click="editComment(item.comment_id)">Edit</button>
+                    <button @click="deleteComment(item.comment_id)">Delete</button>
+                </template>
                 <p v-if="!item.isEditing">{{ item.comment_text }}</p>
                 <div v-else>
                     <input v-model="item.editedComment">

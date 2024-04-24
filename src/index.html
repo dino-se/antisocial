@@ -57,8 +57,10 @@
               <label>
                 <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
                 - {{ item.created_at}}
-                <button @click="editContent(item.post_id)">Edit</button>
-                <button @click="deletePost(item.post_id)">Delete</button>
+                <template v-if="item.user_id == curuser">
+                  <button @click="editContent(item.post_id)">Edit</button>
+                  <button @click="deletePost(item.post_id)">Delete</button>
+                </template>
               </label>  
 
               <p v-if="!item.isEditing">{{ item.content }}</p>

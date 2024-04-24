@@ -1,16 +1,17 @@
 const app = Vue.createApp({
     data() {
         return {
-            comments: []
+            comments: [],
+            owner: ""
         }
     },
     mounted() {
         this.fetchComment();
+        this.owner = localStorage.getItem('user_id');
     },
     methods: {
         fetchComment() {
             const postId = new URLSearchParams(window.location.search).get('post');
-
             fetch(`../api/comment/get_comment.php?postid=${postId}`)
                 .then(response => response.json())
                 .then(data => {
