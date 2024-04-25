@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <link rel="stylesheet" href="assets/css/index.css">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="lib/session.js" async></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -38,20 +39,6 @@
         <a class="btn btn-ghost text-lg">Homepage</a>
       </div>
 
-      <dialog id="x" onclose="clearMind()" class="bg-blue-200">
-        <div>
-          <button onclick="x.close();">X</button>
-          <form id="postForm">
-            <input type="hidden" name="imguid" id="imguid">
-            <textarea name="content" cols="100%" rows="2"></textarea>
-            <div>
-              <input type="file" id="fileInput" name="img[]" accept="image/*" multiple>
-            </div>
-            <button class="bg-blue-800">POST</button>
-          </form>
-        </div>
-      </dialog>
-
       <div class="overflow-auto h-dvh scrollbar-hide">
 
         <div id="homepage">
@@ -79,7 +66,7 @@
                 </template>
               </template>
               
-              <button>Like</button>
+              <button onclick="cmt.showModal()">Like</button>
               <button>
                 <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
               </button>
@@ -97,6 +84,28 @@
 
     </div>
   </div>
+
+  <dialog id="x" onclose="clearMind()" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <form id="postForm">
+        <input type="hidden" name="imguid" id="imguid">
+        <textarea name="content" class="textarea textarea-bordered w-full"></textarea>
+        <div>
+          <input type="file" id="fileInput" name="img[]" accept="image/*" multiple class="file-input file-input-bordered w-full">
+        </div>
+        <button class="btn btn-primary float-end ">POST</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="cmt">
+    <div>
+      <button onclick="cmt.close();">X</button>
+    </div>
+  </dialog>
 
   <!-- <script src="lib/services/login.js"></script> -->
   <script src="lib/services/post.js"></script>
