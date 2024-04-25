@@ -1,3 +1,7 @@
+import { PostFetcher } from "./modules/ContentFetcher.js";
+
+const postFetcher = new PostFetcher();
+
 const app = Vue.createApp({
     data() {
         return {
@@ -11,18 +15,9 @@ const app = Vue.createApp({
     },
      methods: {
         fetchPost() {
-            const cuid = localStorage.getItem('user_id');
-            fetch(`../api/content/get_content.php?fuid=${cuid}&cuid=${cuid}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    this.contents = data.map(content => ({
-                        ...content,
-                        isEditing: false,
-                        editedContent: content.content
-                    }));
-                })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
+            postFetcher.fetchPost()
+            .then(() => {
+                this.contents = postFetcher.contents;
             });
         },
         editContent(id){
