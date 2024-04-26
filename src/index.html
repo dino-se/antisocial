@@ -104,13 +104,15 @@
                 </h2>
               </div>
           
-              <details class="dropdown dropdown-end">
-                <summary class="btn btn-sm btn-primary">More</summary>
-                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                  <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
-                  <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
-                </ul>
-              </details>
+              <template v-if="item.user_id == curuser">
+                <details class="dropdown dropdown-end">
+                  <summary class="btn btn-sm btn-primary">More</summary>
+                  <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                    <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
+                    <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
+                  </ul>
+                </details>
+              </template>
           
             </div>
           
@@ -139,7 +141,8 @@
             </div>
           
             <div class="flex justify-between items-center">
-              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="link link-accent">Comment</a>
+              <a onclick="cmt.showModal()" :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"
+                  target="cmtt" class="link link-accent">Comment</a>
             </div>
           </div>
         </div> 
@@ -179,8 +182,11 @@
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
+      <div class="w-full h-full">
+        <iframe src="comment.html" name="cmtt" frameborder="0" class="w-full h-full"></iframe>
+      </div>
     </div>
-  </dialog>
+  </dialog>  
 
   <!-- <script src="lib/services/login.js"></script> -->
   <script src="lib/services/post.js"></script>
