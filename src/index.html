@@ -45,8 +45,13 @@
           <ul>
             <li v-for="item in contents" :key="item.id">
               <label>
-                <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
-                - {{ item.created_at}}
+                <div class="avatar">
+                  <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                  </div>
+                  <h2 class="card-title px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> - 
+                    <span class="text-gray-600">{{ item.created_at}}</span></h2>
+                </div>
                 <template v-if="item.user_id == curuser">
                   <button @click="editContent(item.post_id)">Edit</button>
                   <button @click="deletePost(item.post_id)">Delete</button>
