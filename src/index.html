@@ -60,11 +60,19 @@
                     <button @click="cancelEditContent(item)">Cancel</button>
                 </div>
               
-              <template v-if="item.filenames && item.filenames.length > 0">
-                <template v-for="(filename, index) in item.filenames">
-                  <img v-if="filename" :src="'..' + filename" :key="index" alt="" width="600" height="400">
-                </template>
-              </template>
+                  <div v-if="item.filenames && item.filenames.length > 0">
+                    <div class="carousel w-full">
+                      <template v-for="(filename, index) in item.filenames" :key="index">
+                        <div :id="'slide' + (index + 1)" class="carousel-item relative w-full">
+                          <img v-if="filename" :src="'..' + filename" class="w-full">
+                          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a :href="'#slide' + ((index - 1 + item.filenames.length) % item.filenames.length + 1)" class="btn btn-circle">❮</a>
+                            <a :href="'#slide' + ((index + 1) % item.filenames.length + 1)" class="btn btn-circle">❯</a>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>               
               
               <button onclick="cmt.showModal()">Like</button>
               <button>
@@ -80,6 +88,10 @@
 
     </div>
     <div class="flex-none w-64 border-l border-gray-300">
+      <label class="input input-bordered flex items-center gap-2">
+        <input type="text" class="grow" placeholder="Search" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+      </label>
       <a class="btn btn-ghost text-lg">Suggestions</a>
 
     </div>

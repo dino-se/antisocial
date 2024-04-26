@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="min-h-screen flex flex-col justify-center">
-        <div class="flex flex-col gap-4 rounded-box bg-base-200 p-6 max-w-md">
+    <div class="flex justify-center items-center h-screen">
+        <div class="flex flex-col gap-4 rounded-box bg-base-200 p-6 max-w-md w-full">
             <h1 class="text-3xl font-bold">Log in</h1>
         
             <span>
@@ -19,31 +19,33 @@
         
             <div class="divider">OR</div>
         
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Email</span>
-                </div>
-        
-                <input class="input input-bordered" />
-            </label>
-        
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Password</span>
-                    <a class="label-text link link-accent">Forgot password?</a>
-                </div>
-        
-                <input type="password" class="input input-bordered" />
-            </label>
-        
-            <div class="form-control">
-                <label class="cursor-pointer label self-start gap-2">
-                    <input type="checkbox" class="checkbox" />
-                    <span class="label-text">Remember me</span>
+            <form id="loginForm">
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Email</span>
+                    </div>
+            
+                    <input id="username" name="username" class="input input-bordered" />
                 </label>
-            </div>
-        
-            <button class="btn btn-primary">Log in</button>
+            
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Password</span>
+                        <a class="label-text link link-accent">Forgot password?</a>
+                    </div>
+            
+                    <input id="password" name="password" type="password" class="input input-bordered" />
+                </label>
+            
+                <div class="form-control">
+                    <label class="cursor-pointer label self-start gap-2">
+                        <input type="checkbox" class="checkbox" />
+                        <span class="label-text">Remember me</span>
+                    </label>
+                </div>
+            
+                <button class="btn btn-primary">Log in</button>
+            </form>
         </div>
     </div>    
     <!-- <h2>Sign In</h2>
