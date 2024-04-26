@@ -80,15 +80,20 @@
             <details class="dropdown dropdown-end">
               <summary class="btn btn-sm btn-primary">More</summary>
               <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                <li class="text-primary"><a>Edit</a></li>
-                <li class="text-danger"><a>Delete</a></li>
+                <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
+                <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
               </ul>
             </details>
         
           </div>
         
           <div class="flex flex-col gap-2">
-            <span class="text-center">{{ item.content }}</span>
+            <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
+                <div v-else>
+                    <input v-model="item.editedContent">
+                    <button @click="saveEditedContent(item)">Save</button>
+                    <button @click="cancelEditContent(item)">Cancel</button>
+                </div>
           </div>
         
           <div class="flex justify-between items-center">
