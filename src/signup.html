@@ -19,49 +19,51 @@
         
             <div class="divider my-0">OR</div>
         
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Email</span>
-                </div>
-        
-                <input class="input input-bordered" />
-            </label>
-    
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Fullname</span>
-                </div>
-        
-                <input class="input input-bordered" />
-            </label>
-        
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Username</span>
-                </div>
-        
-                <input class="input input-bordered" />
-            </label>
-        
-            <label class="form-control">
-                <div class="label">
-                    <span class="label-text">Password</span>
-                </div>
-        
-                <input type="password" class="input input-bordered" />
-            </label>
-        
-            <div class="form-control">
-                <label class="cursor-pointer label self-start gap-2">
-                    <input type="checkbox" class="checkbox" />
-                    <span class="label-text">
-                        I accept the
-                        <a class="link link-accent">Terms and Conditions</a>
-                    </span>
+            <form id="signupForm">
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Email</span>
+                    </div>
+            
+                    <input type="email" id="email" name="email" class="input input-bordered" />
                 </label>
-            </div>
         
-            <button class="btn btn-primary">Create</button>
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Fullname</span>
+                    </div>
+            
+                    <input type="text" id="fullname" name="fullname" class="input input-bordered" />
+                </label>
+            
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Username</span>
+                    </div>
+            
+                    <input type="text" id="username" name="username" class="input input-bordered" />
+                </label>
+            
+                <label class="form-control">
+                    <div class="label">
+                        <span class="label-text">Password</span>
+                    </div>
+            
+                    <input type="password" id="password" name="password" class="input input-bordered" />
+                </label>
+            
+                <div class="form-control">
+                    <label class="cursor-pointer label self-start gap-2">
+                        <input type="checkbox" class="checkbox" required/>
+                        <span class="label-text">
+                            I accept the
+                            <a class="link link-accent">Terms and Conditions</a>
+                        </span>
+                    </label>
+                </div>
+            
+                <button class="btn btn-primary">Create</button>
+            </form>
         </div>
     </div>
     <!-- <h2>Signup</h2>
@@ -80,9 +82,11 @@
         </div>
     </form> -->
 
-    <dialog id="s">
-        <p>You have successfully registered</p>
-        <a href="signin.html">Login</a>
+    <dialog id="s" class="modal">
+        <div class="modal-box text-center w-80">
+            <p class="text-success py-8">You have successfully registered!</p>
+            <a href="signin.html" class="btn btn-success btn-wide">Login</a>
+        </div>
     </dialog>
 
     <script src="lib/services/signup.js"></script>
