@@ -102,7 +102,7 @@
     </div>
   </div>
 
-  <dialog id="x" onclose="clearMind()" class="modal">
+  <dialog id="x" onclose="clearMind()" class="modal modal-top px-96">
     <div class="modal-box">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -118,9 +118,11 @@
     </div>
   </dialog>
 
-  <dialog id="cmt">
-    <div>
-      <button onclick="cmt.close();">X</button>
+  <dialog id="cmt" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
     </div>
   </dialog>
 
