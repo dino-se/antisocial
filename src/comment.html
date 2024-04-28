@@ -48,21 +48,27 @@
                         </template> -->
 
                         <template v-if="item.user_id == owner">
-                            <details class="dropdown dropdown-end dropdownX">
+                            <details class="dropdown dropdown-end dropdownY">
                               <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
                               <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                                <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
-                                <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
+                                <li class="text-info"><a @click="editComment(item.comment_id)">Edit</a></li>
+                                <li class="text-error"><a @click="deleteComment(item.comment_id)">Delete</a></li>
                               </ul>
                             </details>
                           </template>
 
-                        <p v-if="!item.isEditing">{{ item.comment_text }}</p>
-                        <div v-else>
-                            <input v-model="item.editedComment">
-                            <button @click="saveEditedComment(item)">Save</button>
-                            <button @click="cancelEdit(item)">Cancel</button>
-                        </div>
+                          <div class="flex flex-col">
+                            <p v-if="!item.isEditing">{{ item.comment_text }}</p>
+                            <div v-else>
+                                <!-- <input v-model="item.editedComment"> -->
+                                <div class="w-full focus:outline-none" contenteditable="true"
+                                @input="item.editedComment = $event.target.innerText">{{ item.editedComment }}</div>
+                                <div class="float-end">
+                                    <button @click="saveEditedComment(item)" class="p-1 hover:text-success">Save</button>
+                                    <button @click="cancelEdit(item)" class="p-1 hover:text-error">Cancel</button>
+                                </div>
+                            </div>
+                          </div>
                         <div class="divider m-0 p-0"></div>
                     </li>
                 </ul>
@@ -131,6 +137,23 @@
                 alert('An error occurred. Please try again later.');
             });
         });
+
+
+
+        document.addEventListener('click', function(event) {
+        var dropdowns = document.querySelectorAll('.dropdownY');
+        var targetElement = event.target;
+      
+        dropdowns.forEach(function(dropdown) {
+          if (!dropdown.contains(targetElement) && !targetElement.classList.contains('btn')) {
+            dropdown.removeAttribute('open');
+          }
+      
+          if (targetElement.tagName === 'A' && dropdown.contains(targetElement)) {
+            dropdown.removeAttribute('open');
+          }
+        });
+      });
 
 
         
