@@ -4,35 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="assets/css/index.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="lib/session.js" async></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lib/profile.js" defer></script>
 </head>
-<body>
+<body class="flex flex-col h-full w-full">
     <div id="profile">
-      <div class="avatar">
-        <div class="w-24 rounded-full">
-          <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+      <button onclick="window.history.back()">
+        <i class="material-icons">keyboard_backspace</i>
+      </button>
+    
+      <div class="label self-start gap-2">
+        <div class="avatar">
+          <div class="w-24 rounded-full">
+            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+          </div>
+          <span>
+            <h1 class="font-bold text-xl">{{ items.fullname }}</h1>
+            <h1 class="text-gray-600">@{{ items.username }}</h1>
+          </span>
+        </div>
+        <div class="float-end">
+          <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
+            {{ following ? 'Unfollow' : 'Follow' }}
+          </button>
+          <button v-else class="btn">Edit Profile</button>
         </div>
       </div>
-
-      <label class="cursor-pointer label self-start gap-2">
-        <span>
-          <h1 class="font-bold text-xl">{{ items.fullname }}</h1>
-          <h1 class="text-gray-600">@{{ items.username }}</h1>
-        </span>
-        <div v-if="!cuser">
-          <button @click="followToggle()" class="btn btn-info">
-              {{ following ? 'Unfollow' : 'Follow' }}
-          </button>    
-        </div>
-        <div v-else>
-          <button class="btn">Edit Profile</button>
-        </div>
-
-      </label>
+      <div class="divider m-0 p-0"></div>
         <!-- <input type="text" v-model="items[0].user_id">
         <input type="text" v-model="suid"> -->
 <!-- 
@@ -64,42 +67,44 @@
         </div> -->
 
         <!-- Card -->
-        <div v-for="item in mepost" :key="item.id" class="flex flex-col gap-6 bg-base-200 p-6 max-w-xl-2">
-          <div class="flex justify-between items-center">
+        <div class="overflow-auto scrollbar-hide">
         
-            <div class="avatar">
-              <div class="w-8 rounded-full">
-                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+          <div v-for="item in mepost" :key="item.id" class="flex flex-col p-6 max-w-xl-2">
+            <div class="flex justify-between items-center">
+        
+              <div class="avatar">
+                <div class="w-8 rounded-full">
+                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                </div>
+                <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
+                  <span class="text-gray-600">{{ item.created_at}}</span>
+                </h2>
               </div>
-              <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
-                <span class="text-gray-600">{{ item.created_at}}</span>
-              </h2>
+        
+              <details class="dropdown dropdown-end">
+                <summary class="btn btn-sm btn-primary">More</summary>
+                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                  <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
+                  <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
+                </ul>
+              </details>
+        
             </div>
         
-            <details class="dropdown dropdown-end">
-              <summary class="btn btn-sm btn-primary">More</summary>
-              <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
-                <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
-              </ul>
-            </details>
+            <div class="flex flex-col gap-2">
+              <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
+              <div v-else>
+                <input v-model="item.editedContent">
+                <button @click="saveEditedContent(item)">Save</button>
+                <button @click="cancelEditContent(item)">Cancel</button>
+              </div>
+            </div>
         
-          </div>
-        
-          <div class="flex flex-col gap-2">
-            <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
-                <div v-else>
-                    <input v-model="item.editedContent">
-                    <button @click="saveEditedContent(item)">Save</button>
-                    <button @click="cancelEditContent(item)">Cancel</button>
-                </div>
-          </div>
-        
-          <div class="flex justify-between items-center">
-            <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="link link-accent">Comment</a>
+            <div class="flex justify-between items-center">
+              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="link link-accent">Comment</a>
+            </div>
           </div>
         </div>
-
 
     </div>
 </body>

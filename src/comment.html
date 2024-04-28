@@ -13,8 +13,6 @@
     <script src="lib/comment.js" defer></script>
 </head>
 <body class="flex flex-col h-screen w-screen">
-    <div>
-    </div>
 
     <div class="navbar bg-base-100">
         <button onclick="window.history.back()">
@@ -73,20 +71,23 @@
                     </li>
                 </ul>
             </div>
-    
-            <div>
-                <form id="commentme">
+            
+            <div class="footer p-4 flex items-center">
+                <form id="commentme" class="w-full flex items-center gap-2">
                     <input type="hidden" id="user_iddd" name="userid">
                     <input type="hidden" id="post_iddd" name="postid">
                     <!-- <textarea name="commenttext" cols="30" rows="2" class="textarea"></textarea> -->
                     <!-- <div name="commenttext" contenteditable="true"></div> -->
-                    <label class="input input-bordered flex items-center gap-2">
-                        <input type="text" class="grow" name="commenttext" placeholder="Comment" />
-                        <button><i class="material-icons w-4 h-4 opacity-70">send</i></button>
+                    <label class="input input-bordered flex items-center gap-2 w-full">
+                        <input type="text" class="flex-grow w-full" name="commenttext" placeholder="Comment" />
+                        <button type="submit" class="flex-shrink-0">
+                            <i class="material-icons w-4 h-4 opacity-70">send</i>
+                        </button>
                     </label>
                     <!-- <button class="btn">Comment</button> -->
                 </form>
             </div>
+            
         <!-- </div> -->
     <!-- </div> -->
 
