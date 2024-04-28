@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="lib/session.js" async></script>
+    <!-- <script src="lib/session.js" async></script> -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lib/comment.js" defer></script>
@@ -17,33 +17,6 @@
     <!-- <a href="index.html">X</a> -->
 
     <!-- <div class="flex h-screen overflow-hidden"> -->
-        <!-- <div class="flex-auto">
-            <ul>
-                <li v-for="item in contents" :key="item.id">
-                    <label>
-                        <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
-                        - {{ item.created_at}}
-                        <template v-if="item.user_id == curuser">
-                            <button @click="editContent(item.post_id)">Edit</button>
-                            <button @click="deletePost(item.post_id)">Delete</button>
-                        </template>
-                    </label>
-            
-                    <p v-if="!item.isEditing">{{ item.content }}</p>
-                    <div v-else>
-                        <input v-model="item.editedContent">
-                        <button @click="saveEditedContent(item)">Save</button>
-                        <button @click="cancelEditContent(item)">Cancel</button>
-                    </div>
-            
-                    <template v-if="item.filenames && item.filenames.length > 0">
-                        <template v-for="(filename, index) in item.filenames">
-                            <img v-if="filename" :src="'..' + filename" :key="index" alt="" width="600" height="400">
-                        </template>
-                    </template>
-                </li>
-            </ul>
-        </div> -->
     
         <!-- <div class="flex-auto"> -->
             <div id="comment">
