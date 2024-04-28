@@ -4,37 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment</title>
+    <link rel="stylesheet" href="assets/css/index.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <!-- <script src="lib/session.js" async></script> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="lib/session.js" async></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lib/comment.js" defer></script>
 </head>
-<body>
+<body class="flex flex-col h-screen w-screen">
     <div>
     </div>
+
+    <div class="navbar bg-base-100">
+        <button onclick="window.history.back()">
+            <i class="material-icons">keyboard_backspace</i>
+        </button>
+    </div>
+    <div class="divider m-0 p-0"></div>
 
     <!-- <a href="index.html">X</a> -->
 
     <!-- <div class="flex h-screen overflow-hidden"> -->
     
         <!-- <div class="flex-auto"> -->
-            <div id="comment">
+            <div id="comment" class="overflow-auto h-dvh scrollbar-hide">
                 <ul>
                     <li v-for="item in comments" :key="item.id">
-                        <label>{{ item.fullname }} - {{ item.created_at }}</label>
+                        <div class="avatar">
+                            <div class="w-8 rounded-full">
+                                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                            </div>
+                            <label>{{ item.fullname }}
+                                <span class="text-gray-600">
+                                    @{{ item.username }} - {{ item.created_at }}
+                                </span>
+                            </label>
+                        </div>
     
-                        <template v-if="item.user_id == owner">
+                        <!-- <template v-if="item.user_id == owner">
                             <button @click="editComment(item.comment_id)">Edit</button>
                             <button @click="deleteComment(item.comment_id)">Delete</button>
-                        </template>
+                        </template> -->
+
+                        <template v-if="item.user_id == owner">
+                            <details class="dropdown dropdown-end dropdownX">
+                              <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
+                              <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                                <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
+                                <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
+                              </ul>
+                            </details>
+                          </template>
+
                         <p v-if="!item.isEditing">{{ item.comment_text }}</p>
                         <div v-else>
                             <input v-model="item.editedComment">
                             <button @click="saveEditedComment(item)">Save</button>
                             <button @click="cancelEdit(item)">Cancel</button>
                         </div>
-                        <p class="border-b border-gray-300"></p>
+                        <div class="divider m-0 p-0"></div>
                     </li>
                 </ul>
             </div>
@@ -43,8 +72,13 @@
                 <form id="commentme">
                     <input type="hidden" id="user_iddd" name="userid">
                     <input type="hidden" id="post_iddd" name="postid">
-                    <textarea name="commenttext" cols="30" rows="2"></textarea>
-                    <button>Comment</button>
+                    <!-- <textarea name="commenttext" cols="30" rows="2" class="textarea"></textarea> -->
+                    <!-- <div name="commenttext" contenteditable="true"></div> -->
+                    <label class="input input-bordered flex items-center gap-2">
+                        <input type="text" class="grow" name="commenttext" placeholder="Comment" />
+                        <button><i class="material-icons w-4 h-4 opacity-70">send</i></button>
+                    </label>
+                    <!-- <button class="btn">Comment</button> -->
                 </form>
             </div>
         <!-- </div> -->
