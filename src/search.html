@@ -11,7 +11,6 @@
 </head>
 <body>
     <div id="search">
-        <a href="index.html">Home</a>
         <input type="text" v-model="searchText" placeholder="Enter search term">
         <button @click="performSearch">Search</button>
         <div v-if=" searchText.length > 0">

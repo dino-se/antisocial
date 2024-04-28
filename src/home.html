@@ -7,158 +7,98 @@
   <title>Homepage</title>
   <link rel="stylesheet" href="assets/css/index.css">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="lib/session.js"></script>
   <script src="lib/home.js" type="module"></script>
-  <script src="lib/nav.js" defer></script>
 </head>
 
-<body>
-  <div class="flex h-screen overflow-hidden">
-    <div class="flex-none w-80 border-r border-gray-300">
-      <ul class="menu text-2xl place-content-center pt-5">
-        <li>
-          <a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            Homepage
-          </a>
-        </li>
-        <li>
-          <a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Search
-          </a>
-        </li>
-        <div id="nav">
-          <li>
-            <button onclick="x.showModal()">Create</button>
-          </li>
-          <li>
-            <button type="submit" onclick="deleteLocalStorageItem()">logout</button>
-          </li>
-          <li>
-            <a :href="'profile.html?uid='+uid">Profile</a>
-          </li>
-        </div>
-      </ul>
-    </div>
-    <div class="flex-auto">
-      <div class="navbar bg-base-100 border-b border-gray-300">
-        <a class="btn btn-ghost text-lg">Homepage</a>
-      </div>
-
-      <dialog id="x" class="bg-blue-800">
-        <div>
-          <button onclick="x.close()">X</button>
-          <form id="postForm">
-            <input type="hidden" name="userid" id="userid">
-            <textarea name="content" cols="100%" rows="2"></textarea>
-            <div>
-              <input type="file" accept="image/*" multiple>
-            </div>
-            <button class="bg-blue-800">POST</button>
-          </form>
-        </div>
-      </dialog>
-
-      <div class="overflow-auto h-dvh scrollbar-hide">
-
-        <div id="homepage">
-          <ul>
-            <li v-for="item in items" :key="item.id">
-
-              <label>
-                <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a>
-                - {{ item.created_at}}
-                <button>Edit</button>
-                <button>Delete</button>
-              </label>
-
-              <p>{{ item.content }}</p>
-              <button>Like</button>
-              <button>
-                <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
-              </button>
-              <button>Share</button>
-              <p class="border-b border-gray-300"></p>
-          </li>
-        </ul>
-          <!-- <div class="w-fit px-5 border-b border-gray-300">
-            <div class="card-body">
-              <div class="avatar">
-                <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                </div>
-                <h2 class="card-title px-5">Cat - <span class="text-gray-600">3h</span></h2>
-              </div>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-            </div>
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" />
-            </figure>
-            <div class="btm-nav relative card-action">
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-              </button>
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </button>
-              <button>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-              </button>
-            </div>
-          </div> -->
-        </div>
-
-      </div>
-
-    </div>
-    <div class="flex-none w-64 border-l border-gray-300">
-
-      <div class="flex flex-col gap-4 w-52 px-2 py-2">
-        <div class="flex gap-4 items-center">
-          <div class="skeleton w-16 h-16 rounded-full shrink-0"></div>
-          <div class="flex flex-col gap-4">
-            <div class="skeleton h-4 w-28"></div>
-            <div class="skeleton h-4 w-28"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-4 w-52 px-2 py-2">
-        <div class="flex gap-4 items-center">
-          <div class="skeleton w-16 h-16 rounded-full shrink-0"></div>
-          <div class="flex flex-col gap-4">
-            <div class="skeleton h-4 w-28"></div>
-            <div class="skeleton h-4 w-28"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-4 w-52 px-2 py-2">
-        <div class="flex gap-4 items-center">
-          <div class="skeleton w-16 h-16 rounded-full shrink-0"></div>
-          <div class="flex flex-col gap-4">
-            <div class="skeleton h-4 w-28"></div>
-            <div class="skeleton h-4 w-28"></div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
+<body class="flex flex-col h-screen w-screen">
+  <div class="navbar bg-base-100">
+    <a class="btn btn-ghost text-lg">Homepage</a>
   </div>
+  <div class="divider"></div>
 
-  <script src="lib/services/login.js"></script>
-  <script src="lib/services/post.js"></script>
+  <div class="overflow-auto h-dvh scrollbar-hide">
+
+    <div id="homepage">
+       <!-- Card -->
+      <div v-for="item in contents" :key="item.id" class="gap-6 bg-base-200 p-12 m-6 max-w-xl-2 rounded-box">
+        <div class="flex justify-between items-center">
+      
+          <div class="avatar">
+            <div class="w-8 rounded-full">
+              <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+            </div>
+            <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id" target="main-content">{{ item.fullname }}</a> -
+              <span class="text-gray-600">{{ item.created_at}}</span>
+            </h2>
+          </div>
+      
+          <template v-if="item.user_id == curuser">
+            <details class="dropdown dropdown-end dropdownX">
+              <summary class="m-1 btn"><i class="material-icons">more_horiz</i></summary>
+              <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
+                <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
+              </ul>
+            </details>
+          </template>
+      
+        </div>
+      
+        <div class="flex flex-col gap-2 py-4">
+          <p v-if="!item.isEditing">{{ item.content }}</p>
+              <div v-else>
+                  <textarea v-model="item.editedContent" class="w-full textarea"></textarea>
+                  <div class="float-end">
+                    <button @click="saveEditedContent(item)" class="p-1">Save</button>
+                    <button @click="cancelEditContent(item)" class="p-1">Cancel</button>
+                  </div>
+              </div>
+        </div>
+
+
+        <div v-if="item.filenames && item.filenames.length > 0">
+          <div class="carousel w-full">
+            <template v-for="(filename, index) in item.filenames" :key="index">
+              <div :id="'slide' + (index + 1)" class="carousel-item relative w-full">
+                <img v-if="filename" :src="'..' + filename" class="w-full">
+                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                  <a :href="'#slide' + ((index - 1 + item.filenames.length) % item.filenames.length + 1)" class="btn btn-circle">❮</a>
+                  <a :href="'#slide' + ((index + 1) % item.filenames.length + 1)" class="btn btn-circle">❯</a>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      
+        <div class="flex justify-between items-center">
+          <a onclick="cmt.showModal()" :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"
+              target="cmtt"><i class="material-icons">forum</i></a>
+        </div>
+      </div>
+    </div> 
+   
+    <script>
+      document.addEventListener('click', function(event) {
+        var dropdowns = document.querySelectorAll('.dropdownX');
+        var targetElement = event.target;
+      
+        dropdowns.forEach(function(dropdown) {
+          if (!dropdown.contains(targetElement) && !targetElement.classList.contains('btn')) {
+            dropdown.removeAttribute('open');
+          }
+      
+          if (targetElement.tagName === 'A' && dropdown.contains(targetElement)) {
+            dropdown.removeAttribute('open');
+          }
+        });
+      });
+      </script>
+
+  </div>
 </body>
 
 </html>

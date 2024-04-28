@@ -7,6 +7,7 @@
   <title>Homepage</title>
   <link rel="stylesheet" href="assets/css/index.css">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="lib/session.js" async></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,143 +21,30 @@
       <ul class="menu text-2xl place-content-center pt-5">
         <div id="nav">
           <li>
-            <a href="">Home</a>
+            <a href="home.html" target="main-content"><i class="material-icons">home</i> Home</a>
           </li>
           <li>
-            <button onclick="x.showModal()">Create</button>
+            <button onclick="x.showModal()"><i class="material-icons">create</i> Create</button>
           </li>
           <li>
-            <a href="search.html">Search</a>
+            <a href="search.html" target="main-content"><i class="material-icons">search</i> Search</a>
           </li>
           <li>
-            <a :href="'profile.html?uid='+uid">Profile</a>
+            <a :href="'profile.html?uid='+uid" target="main-content"><i class="material-icons">account_circle</i> Profile</a>
           </li>
           <li>
-            <button type="submit" onclick="signoutUser()">Logout</button>
+            <button type="submit" onclick="signoutUser()"><i class="material-icons">logout</i> Logout</button>
           </li>
         </div>
-      </ul>
+      </ul>      
       
     </div>
       <div class="divider divider-horizontal m-0 p-0"></div>
 
     <div class="flex flex-col w-full">
       
-      <div class="navbar bg-base-100">
-        <a class="btn btn-ghost text-lg">Homepage</a>
-      </div>
-      <div class="divider"></div>
-
-      <div class="overflow-auto h-dvh scrollbar-hide">
-
-        <div id="homepage">
-          <!-- <ul>
-            <li v-for="item in contents" :key="item.id">
-              <label>
-                <div class="avatar">
-                  <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-                  </div>
-                  <h2 class="card-title px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> - 
-                    <span class="text-gray-600">{{ item.created_at}}</span></h2>
-                </div>
-                <template v-if="item.user_id == curuser">
-                  <button @click="editContent(item.post_id)">Edit</button>
-                  <button @click="deletePost(item.post_id)">Delete</button>
-                </template>
-              </label>
-
-              <p v-if="!item.isEditing">{{ item.content }}</p>
-                <div v-else>
-                    <input v-model="item.editedContent">
-                    <button @click="saveEditedContent(item)">Save</button>
-                    <button @click="cancelEditContent(item)">Cancel</button>
-                </div>
-              
-                  <div v-if="item.filenames && item.filenames.length > 0">
-                    <div class="carousel w-full">
-                      <template v-for="(filename, index) in item.filenames" :key="index">
-                        <div :id="'slide' + (index + 1)" class="carousel-item relative w-full">
-                          <img v-if="filename" :src="'..' + filename" class="w-full">
-                          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a :href="'#slide' + ((index - 1 + item.filenames.length) % item.filenames.length + 1)" class="btn btn-circle">❮</a>
-                            <a :href="'#slide' + ((index + 1) % item.filenames.length + 1)" class="btn btn-circle">❯</a>
-                          </div>
-                        </div>
-                      </template>
-                    </div>
-                  </div>
-              
-              <button onclick="cmt.showModal()">Like</button>
-              <button>
-                <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id">Comment</a>
-              </button>
-              <button>Share</button>
-              <p class="border-b border-gray-300"></p>
-            </li>
-          </ul> -->
-
-
-
-
-           <!-- Card -->
-          <div v-for="item in contents" :key="item.id" class="gap-6 bg-base-200 p-6 max-w-xl-2">
-            <div class="flex justify-between items-center">
-          
-              <div class="avatar">
-                <div class="w-8 rounded-full">
-                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-                </div>
-                <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
-                  <span class="text-gray-600">{{ item.created_at}}</span>
-                </h2>
-              </div>
-          
-              <template v-if="item.user_id == curuser">
-                <details class="dropdown dropdown-end">
-                  <summary class="btn btn-sm btn-primary">More</summary>
-                  <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                    <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
-                    <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
-                  </ul>
-                </details>
-              </template>
-          
-            </div>
-          
-            <div class="flex flex-col gap-2">
-              <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
-                  <div v-else>
-                      <input v-model="item.editedContent">
-                      <button @click="saveEditedContent(item)">Save</button>
-                      <button @click="cancelEditContent(item)">Cancel</button>
-                  </div>
-            </div>
-
-
-            <div v-if="item.filenames && item.filenames.length > 0">
-              <div class="carousel w-full">
-                <template v-for="(filename, index) in item.filenames" :key="index">
-                  <div :id="'slide' + (index + 1)" class="carousel-item relative w-full">
-                    <img v-if="filename" :src="'..' + filename" class="w-full">
-                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a :href="'#slide' + ((index - 1 + item.filenames.length) % item.filenames.length + 1)" class="btn btn-circle">❮</a>
-                      <a :href="'#slide' + ((index + 1) % item.filenames.length + 1)" class="btn btn-circle">❯</a>
-                    </div>
-                  </div>
-                </template>
-              </div>
-            </div>
-          
-            <div class="flex justify-between items-center">
-              <a onclick="cmt.showModal()" :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"
-                  target="cmtt" class="link link-accent">Comment</a>
-            </div>
-          </div>
-        </div> 
-       
-
-      </div>
+      
+      <iframe src="home.html" name="main-content" frameborder="0" class="w-full h-full"></iframe>
 
     </div>
 
