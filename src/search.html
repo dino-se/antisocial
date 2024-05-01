@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lib/search.js" defer></script>
 </head>
+
 <body>
     <div id="search">
 
         <div class="navbar flex">
             <label class="input input-bordered flex items-center gap-2 w-full">
-                <input type="text" v-model="searchText" class="flex-grow w-full" placeholder="Search"/>
+                <input type="text" v-model="searchText" class="flex-grow w-full" placeholder="Search" />
                 <button @click="performSearch" class="flex-shrink-0">
                     <i class="material-icons w-4 h-4 opacity-70">search</i>
                 </button>
             </label>
-        </div>        
-        
+        </div>
+
         <!-- <input type="text" v-model="searchText" placeholder="Enter search term"> -->
         <!-- <button @click="performSearch">Search</button> -->
         <!-- <div v-if=" searchText.length > 0">
@@ -41,18 +43,19 @@
                     </div>
                     <label class="text-lg">
                         <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}
-                        <div class="text-gray-600">
-                            @{{ item.username }}
-                        </div>
-                    </a>
+                            <div class="text-gray-600">
+                                @{{ item.username }}
+                            </div>
+                        </a>
                     </label>
                 </div>
             </div>
-    </div>
+        </div>
 
         <div v-else>
             No results found.
         </div>
     </div>
 </body>
+
 </html>

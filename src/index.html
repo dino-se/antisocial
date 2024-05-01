@@ -30,26 +30,24 @@
             <a href="search.html" target="main-content"><i class="material-icons">search</i> Search</a>
           </li>
           <li>
-            <a :href="'profile.html?uid='+uid" target="main-content"><i class="material-icons">account_circle</i> Profile</a>
+            <a :href="'profile.html?uid='+uid" target="main-content"><i class="material-icons">account_circle</i>
+              Profile</a>
           </li>
           <li>
             <a type="submit" onclick="signoutUser()"><i class="material-icons">logout</i> Logout</a>
           </li>
         </div>
-      </ul>      
-      
+      </ul>
+
     </div>
-      <div class="divider divider-horizontal m-0 p-0"></div>
+    <div class="divider divider-horizontal m-0 p-0"></div>
 
     <div class="flex flex-col w-full">
-      
-      
       <iframe src="home.html" name="main-content" frameborder="0" class="w-full h-full"></iframe>
-
     </div>
 
     <div class="divider divider-horizontal m-0 p-0"></div>
-    
+
     <div class="flex flex-col w-96">
 
       <div class="p-6">
@@ -57,7 +55,7 @@
                 <input type="text" class="grow" placeholder="Search" />
                 <i class="material-icons w-4 h-4 opacity-70">search</i>
               </label> -->
-        <div class="text-lg">Suggestions</div>
+        <div class="text-xl">Suggestions</div>
         <div class="avatar pt-3">
           <div class="w-10 h-10 rounded-full">
             <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
@@ -105,19 +103,20 @@
         <form method="dialog">
           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-       <div class="pt-6">
-        <form id="postForm">
-          <input type="hidden" name="imguid" id="imguid">
-          <textarea name="content" class="textarea textarea-bordered w-full P-6 "></textarea>
-          <div>
-            <input type="file" id="fileInput" name="img[]" accept="image/*" multiple class="file-input file-input-bordered w-full">
-          </div>
-          <button class="btn btn-primary float-end ">POST</button>
-        </form>
-       </div>
+        <div class="pt-6">
+          <form id="postForm">
+            <input type="hidden" name="imguid" id="imguid">
+            <textarea name="content" class="textarea textarea-bordered w-full P-6 "></textarea>
+            <div>
+              <input type="file" id="fileInput" name="img[]" accept="image/*" multiple
+                class="file-input file-input-bordered w-full">
+            </div>
+            <button class="btn btn-primary float-end ">POST</button>
+          </form>
+        </div>
       </div>
     </dialog>
-    
+
   </div>
 
   <!-- <script src="lib/services/login.js"></script> -->
