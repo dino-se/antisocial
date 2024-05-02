@@ -8,12 +8,16 @@ if(isset($_GET['cuid'])) {
     try {
         $query = "SELECT post.*,
                 users.user_id, users.fullname, users.username, 
-                image.filename, image.image_uid
-                FROM post 
+                image.filename, image.image_uid,
+                COUNT(comment.comment_id) AS comment_count
+                FROM post
                 INNER JOIN users ON post.user_id = users.user_id 
                 LEFT JOIN follows ON post.user_id = follows.following_id
-                LEFT JOIN image ON image.image_uid = post.image_uid 
+                LEFT JOIN image ON image.image_uid = post.image_uid
+                LEFT JOIN comment ON comment.post_id = post.post_id
                 WHERE follows.follower_id = :fuid OR users.user_id = :cuid
+                GROUP BY post.post_id, users.user_id, users.fullname,
+                         users.username, image.filename, image.image_uid
                 ORDER BY post.post_id DESC";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':fuid', $fuid);

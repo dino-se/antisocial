@@ -75,9 +75,9 @@
                   <div v-if="item.filenames.length > 1"
                     class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                     <a :href="'#slide'+ item.post_id + ((index - 1 + item.filenames.length) % item.filenames.length + 1)"
-                      class="btn btn-circle">❮</a>
+                      class="btn btn-circle"><i class="material-icons">chevron_left</i></a>
                     <a :href="'#slide'+ item.post_id + ((index + 1) % item.filenames.length + 1)"
-                      class="btn btn-circle">❯</a>
+                      class="btn btn-circle"><i class="material-icons">chevron_right</i></a>
                   </div>
                 </div>
               </template>
@@ -86,9 +86,9 @@
 
           <span class="text-gray-600">{{ item.created_at}}</span>
 
-          <div class="flex justify-between items-center">
-            <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"><i
-                class="material-icons">forum</i></a>
+          <div class="flex justify-between items-center p-3">
+            <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="flex items-center"><i
+                class="material-icons mr-2">forum</i> {{ item.comment_count }}</a>
           </div>
         </div>
         <div class="divider m-0 p-0"></div>

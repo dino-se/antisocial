@@ -34,7 +34,7 @@
         </div> -->
 
         <div v-if=" searchText.length > 0">
-            Search for
+            Search for {{ searchText }}
             <div class="divider m-0 p-0"></div>
             <div v-for="item in resultsFiltered" :key="item.id" class="px-3 m-3">
                 <div class="avatar">
