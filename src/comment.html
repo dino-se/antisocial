@@ -66,8 +66,8 @@
                         <div class="w-full focus:outline-none" contenteditable="true"
                             @input="item.editedComment = $event.target.innerText">{{ item.editedComment }}</div>
                         <div class="float-end">
-                            <button @click="saveEditedComment(item)" class="p-1 text-primary hover:underline">Save</button>
-                            <button @click="cancelEdit(item)" class="p-1 text-primary hover:underline">Cancel</button>
+                            <button @click="saveEditedComment(item)" class="p-1 text-info hover:underline">Save</button>
+                            <button @click="cancelEdit(item)" class="p-1 text-info hover:underline">Cancel</button>
                         </div>
                     </div>
                 </div>
