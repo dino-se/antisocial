@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="lib/session.js" async></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="lib/profile.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="lib/session.js" async></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="lib/profile.js" defer></script>
 </head>
-<body class="flex flex-col h-full w-full">
-    <div id="profile">
-      <button onclick="window.history.back()">
-        <i class="material-icons">keyboard_backspace</i>
-      </button>
-    
-      <div class="label self-start gap-2">
-        <div class="avatar">
-          <div class="w-24 rounded-full">
-            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-          </div>
-          <span>
-            <h1 class="font-bold text-xl">{{ items.fullname }}</h1>
-            <h1 class="text-gray-600">@{{ items.username }}</h1>
-          </span>
+
+<body>
+  <div id="profile" class="flex flex-col h-screen w-full">
+    <button onclick="window.history.back()" class="flex items-center">
+      <i class="material-icons">keyboard_backspace</i>
+    </button>
+
+    <div class="flex justify-between items-center p-6">
+      <div class="avatar flex items-center">
+        <div class="w-24 rounded-full">
+          <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
         </div>
-        <div class="float-end">
-          <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
-            {{ following ? 'Unfollow' : 'Follow' }}
-          </button>
-          <button v-else class="btn">Edit Profile</button>
-        </div>
+        <span class="m-3">
+          <h1 class="font-bold text-xl">{{ items.fullname }}</h1>
+          <h1 class="text-gray-600">@{{ items.username }}</h1>
+        </span>
       </div>
-      <div class="divider m-0 p-0"></div>
-        <!-- <input type="text" v-model="items[0].user_id">
+      <div>
+        <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
+          {{ following ? 'Unfollow' : 'Follow' }}
+        </button>
+        <button v-else class="btn">Edit Profile</button>
+      </div>
+    </div>
+    <div class="divider m-0 p-0"></div>
+    <!-- <input type="text" v-model="items[0].user_id">
         <input type="text" v-model="suid"> -->
-<!-- 
+    <!-- 
         <div>
             <ul>
                 <li v-for="item in mepost" :key="item.id">
@@ -66,46 +68,119 @@
               </ul>
         </div> -->
 
-        <!-- Card -->
-        <div class="overflow-auto scrollbar-hide">
-        
-          <div v-for="item in mepost" :key="item.id" class="flex flex-col p-6 max-w-xl-2">
-            <div class="flex justify-between items-center">
-        
-              <div class="avatar">
-                <div class="w-8 rounded-full">
-                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-                </div>
-                <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
-                  <span class="text-gray-600">{{ item.created_at}}</span>
-                </h2>
+    <!-- Card -->
+    <div class="overflow-auto h-dvh scrollbar-hide">
+
+    <div v-for="item in mepost" :key="item.id">
+      <div class="flex flex-col p-6 max-w-xl-2">
+        <div class="flex justify-between items-center">
+
+          <!-- <div class="avatar">
+              <div class="w-8 rounded-full">
+                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
               </div>
-        
-              <details class="dropdown dropdown-end">
-                <summary class="btn btn-sm btn-primary">More</summary>
-                <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-                  <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
-                  <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
-                </ul>
-              </details>
-        
+              <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
+                <span class="text-gray-600">{{ item.created_at}}</span>
+              </h2>
+            </div> -->
+
+          <div class="avatar flex items-center">
+            <div class="w-12 h-12 rounded-full">
+              <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
             </div>
-        
-            <div class="flex flex-col gap-2">
-              <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
-              <div v-else>
-                <input v-model="item.editedContent">
-                <button @click="saveEditedContent(item)">Save</button>
-                <button @click="cancelEditContent(item)">Cancel</button>
-              </div>
+            <div class="ml-3 text-lg">
+              <h1 class="card-details">
+                <a :href="'profile.html?uid=' + item.user_id">{{ item.fullname }}</a>
+              </h1>
+              <span class="text-gray-600 break-normal">@{{ item.username }}</span>
             </div>
-        
-            <div class="flex justify-between items-center">
-              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="link link-accent">Comment</a>
+          </div>
+
+          <details class="dropdown dropdown-end dropdownX">
+            <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
+            <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+              <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
+              <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
+            </ul>
+          </details>
+
+          <!-- <details class="dropdown dropdown-end">
+              <summary class="btn btn-sm btn-primary">More</summary>
+              <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
+                <li class="text-danger"><a @click="deletePost(item.post_id)">Delete</a></li>
+              </ul>
+            </details> -->
+
+        </div>
+
+        <!-- <div class="flex flex-col gap-2">
+            <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
+            <div v-else>
+              <input v-model="item.editedContent">
+              <button @click="saveEditedContent(item)">Save</button>
+              <button @click="cancelEditContent(item)">Cancel</button>
+            </div>
+          </div> -->
+
+        <div class="flex flex-col gap-2 py-4">
+          <p v-if="!item.isEditing">{{ item.content }}</p>
+          <div v-else>
+            <div class="w-full focus:outline-none" contenteditable="true"
+              @input="item.editedContent = $event.target.innerText">{{ item.editedContent }}</div>
+            <div class="float-end">
+              <button @click="saveEditedContent(item)" class="p-1 hover:text-success">Save</button>
+              <button @click="cancelEditContent(item)" class="p-1 hover:text-error">Cancel</button>
             </div>
           </div>
         </div>
 
+        <div v-if="item.filenames && item.filenames.length > 0">
+          <div class="carousel w-full rounded-box">
+            <template v-for="(filename, index) in item.filenames" :key="index">
+              <div :id="'slide'+ item.post_id + (index + 1)" class="carousel-item relative w-full">
+                <img v-if="filename" :src="'..' + filename" class="w-full">
+                <div v-if="item.filenames.length > 1"
+                  class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                  <a :href="'#slide'+ item.post_id + ((index - 1 + item.filenames.length) % item.filenames.length + 1)"
+                    class="btn btn-circle"><i class="material-icons">chevron_left</i></a>
+                  <a :href="'#slide'+ item.post_id + ((index + 1) % item.filenames.length + 1)"
+                    class="btn btn-circle"><i class="material-icons">chevron_right</i></a>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <span class="text-gray-600">{{ item.created_at}}</span>
+
+        <div class="flex justify-between items-center p-3">
+          <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="flex items-center"><i
+              class="material-icons mr-2">forum</i> {{ item.comment_count }}</a>
+        </div>
+      </div>
+      <div class="divider m-0 p-0"></div>
     </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('click', function (event) {
+      var dropdowns = document.querySelectorAll('.dropdownX');
+      var targetElement = event.target;
+
+      dropdowns.forEach(function (dropdown) {
+        if (!dropdown.contains(targetElement) && !targetElement.classList.contains('btn')) {
+          dropdown.removeAttribute('open');
+        }
+
+        if (targetElement.tagName === 'A' && dropdown.contains(targetElement)) {
+          dropdown.removeAttribute('open');
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
