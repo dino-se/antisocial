@@ -25,20 +25,19 @@
     <div id="homepage">
       <!-- Card -->
       <div v-for="item in contents" :key="item.id">
-        <div class="px-6 m-6 max-w-xl-2">
+        <div class="px-6 m-6">
           <div class="flex justify-between items-center">
 
-            <div class="avatar flex items-center">
-              <div class="w-12 h-12 rounded-full">
-                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+            <a :href="'profile.html?uid=' + item.user_id">
+              <div class="avatar container">
+                <div class="w-12 h-12 rounded-full">
+                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                </div>
+                  <label class="text-lg pl-2">{{ item.fullname }}
+                    <p class="text-gray-600 break-normal">@{{ item.username }}</p>
+                  </label>
               </div>
-              <div class="ml-3 text-lg">
-                <h1 class="card-details">
-                  <a :href="'profile.html?uid=' + item.user_id">{{ item.fullname }}</a>
-                </h1>
-                <span class="text-gray-600 break-normal">@{{ item.username }}</span>
-              </div>
-            </div>
+            </a>
 
 
             <template v-if="item.user_id == curuser">

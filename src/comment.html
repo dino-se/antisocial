@@ -31,16 +31,18 @@
     <div id="comment" class="overflow-auto h-dvh scrollbar-hide">
         <ul>
             <li v-for="item in comments" :key="item.id">
-                <div class="avatar">
-                    <div class="w-8 rounded-full">
-                        <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                <a :href="'profile.html?uid=' + item.user_id">
+                    <div class="avatar container p-3">
+                        <div class="w-10 rounded-full">
+                            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                        </div>
+                        <label class="pl-3">{{ item.fullname }}
+                            <span class="text-gray-600">
+                                @{{ item.username }} - {{ item.created_at }}
+                            </span>
+                        </label>
                     </div>
-                    <label>{{ item.fullname }}
-                        <span class="text-gray-600">
-                            @{{ item.username }} - {{ item.created_at }}
-                        </span>
-                    </label>
-                </div>
+                </a>
 
                 <!-- <template v-if="item.user_id == owner">
                             <button @click="editComment(item.comment_id)">Edit</button>
@@ -57,15 +59,15 @@
                     </details>
                 </template>
 
-                <div class="flex flex-col">
+                <div class="flex flex-col p-3">
                     <p v-if="!item.isEditing">{{ item.comment_text }}</p>
                     <div v-else>
                         <!-- <input v-model="item.editedComment"> -->
                         <div class="w-full focus:outline-none" contenteditable="true"
                             @input="item.editedComment = $event.target.innerText">{{ item.editedComment }}</div>
                         <div class="float-end">
-                            <button @click="saveEditedComment(item)" class="p-1 hover:text-success">Save</button>
-                            <button @click="cancelEdit(item)" class="p-1 hover:text-error">Cancel</button>
+                            <button @click="saveEditedComment(item)" class="p-1 text-primary hover:underline">Save</button>
+                            <button @click="cancelEdit(item)" class="p-1 text-primary hover:underline">Cancel</button>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="lib/profile.js" defer></script>
+  <script src="lib/info.js"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
       <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
         {{ following ? 'Unfollow' : 'Follow' }}
       </button>
-      <button v-else class="btn">Edit Profile</button>
+      <button v-else class="btn" onclick="changeInfo()">Edit Profile</button>
     </div>
     <div class="divider m-0 p-0"></div>
     <!-- <input type="text" v-model="items[0].user_id">
@@ -82,17 +83,16 @@
               </h2>
             </div> -->
 
-            <div class="avatar flex items-center">
-              <div class="w-12 h-12 rounded-full">
-                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+            <a :href="'profile.html?uid=' + item.user_id">
+              <div class="avatar container">
+                <div class="w-12 h-12 rounded-full">
+                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                </div>
+                  <label class="text-lg pl-2">{{ item.fullname }}
+                    <p class="text-gray-600 break-normal">@{{ item.username }}</p>
+                  </label>
               </div>
-              <div class="ml-3 text-lg">
-                <h1 class="card-details">
-                  <a :href="'profile.html?uid=' + item.user_id">{{ item.fullname }}</a>
-                </h1>
-                <span class="text-gray-600 break-normal">@{{ item.username }}</span>
-              </div>
-            </div>
+            </a>
 
             <details class="dropdown dropdown-end dropdownX">
               <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
@@ -127,8 +127,8 @@
               <div class="w-full focus:outline-none" contenteditable="true"
                 @input="item.editedContent = $event.target.innerText">{{ item.editedContent }}</div>
               <div class="float-end">
-                <button @click="saveEditedContent(item)" class="p-1 hover:text-success">Save</button>
-                <button @click="cancelEditContent(item)" class="p-1 hover:text-error">Cancel</button>
+                <button @click="saveEditedContent(item)" class="p-1 text-success hover:underline">Save</button>
+                <button @click="cancelEditContent(item)" class="p-1 text-error hover:underline">Cancel</button>
               </div>
             </div>
           </div>

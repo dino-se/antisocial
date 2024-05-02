@@ -12,6 +12,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="lib/main.js" defer></script>
+  <script src="lib/info.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                 <i class="material-icons w-4 h-4 opacity-70">search</i>
               </label> -->
         <div class="text-xl">Suggestions</div>
-        <div class="avatar pt-3">
+        <!-- <div class="avatar pt-3">
           <div class="w-10 h-10 rounded-full">
             <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
           </div>
@@ -64,21 +65,20 @@
               </div>
             </a>
           </label>
-        </div>
+        </div> -->
         <div v-for="item in sugg" :key="item.id">
-          <div class="avatar pt-3">
-            <div class="w-10 h-10 rounded-full">
-              <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-            </div>
-            <label class="text-lg">
-              <a :href="'profile.html?uid=' + item.user_id" target="main-content">
-                {{ item.fullname }}
-                <div class="text-gray-600">
+          <a :href="'profile.html?uid=' + item.user_id" target="main-content">
+            <div class="avatar flex items-center pt-3">
+              <div class="w-10 h-10 rounded-full">
+                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+              </div>
+              <label class="text-lg pl-2"> {{ item.fullname }}
+                <p class="text-gray-600">
                   @{{ item.username }}
-                </div>
-              </a>
-            </label>
-          </div>
+                </p>
+              </label>
+            </div>
+          </a>
         </div>
 
       </div>
@@ -103,6 +103,14 @@
           <button class="btn btn-primary float-end ">POST</button>
         </form>
       </div>
+    </div>
+  </dialog>
+
+  <dialog id="my" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
     </div>
   </dialog>
 

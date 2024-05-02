@@ -37,18 +37,33 @@
             Search for "{{ searchText }}"
             <div class="divider m-0 p-0"></div>
             <div v-for="item in resultsFiltered" :key="item.id" class="px-3 m-3">
-                <div class="avatar">
-                    <div class="w-10 h-10 rounded-full">
-                        <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-                    </div>
-                    <label class="text-lg">
-                        <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}
-                            <div class="text-gray-600">
+                <!-- <a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}
+                    <div class="avatar">
+                        <div class="w-10 h-10 rounded-full">
+                            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                        </div>
+                        <label class="text-lg">
+            
+                            <p class="text-gray-600">
                                 @{{ item.username }}
-                            </div>
-                        </a>
-                    </label>
-                </div>
+                            </p>
+            
+                        </label>
+                    </div>
+                </a> -->
+
+                <a :href="'profile.html?uid=' + item.user_id">
+                    <div class="avatar flex items-center pt-3">
+                      <div class="w-10 h-10 rounded-full">
+                        <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                      </div>
+                      <label class="text-lg pl-2"> {{ item.fullname }}
+                        <p class="text-gray-600">
+                          @{{ item.username }}
+                        </p>
+                      </label>
+                    </div>
+                  </a>
             </div>
         </div>
 
