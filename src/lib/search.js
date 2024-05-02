@@ -23,6 +23,11 @@ const search = Vue.createApp({
             this.resultsFiltered = this.results.filter(item =>
                 item.fullname.toLowerCase().includes(this.searchText.toLowerCase())
             );
+        },
+        updateURL() {
+            const params = new URLSearchParams(window.location.search);
+            params.set('search', this.searchText);
+            window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
         }
     },
     computed: {

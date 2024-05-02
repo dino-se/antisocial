@@ -8,8 +8,13 @@ if(isset($_GET['uid'])) {
 
     try {
         $query = "SELECT * FROM users
-                  LEFT JOIN follows ON users.user_id = follows.follower_id
-                  WHERE user_id = :uid";
+                  LEFT JOIN follows
+                  ON users.user_id = follows.following_id
+                  AND follows.follower_id = :uid
+                  WHERE follows.following_id IS NULL
+                  AND users.user_id != :uid
+                  ORDER BY RAND()
+                  LIMIT 5";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();

@@ -17,7 +17,7 @@
 
         <div class="navbar flex">
             <label class="input input-bordered flex items-center gap-2 w-full">
-                <input type="text" v-model="searchText" class="flex-grow w-full" placeholder="Search" />
+                <input type="text" v-model="searchText" @input="updateURL()" class="flex-grow w-full" placeholder="Search" />
                 <button @click="performSearch" class="flex-shrink-0">
                     <i class="material-icons w-4 h-4 opacity-70">search</i>
                 </button>
@@ -34,7 +34,7 @@
         </div> -->
 
         <div v-if=" searchText.length > 0">
-            Search for {{ searchText }}
+            Search for "{{ searchText }}"
             <div class="divider m-0 p-0"></div>
             <div v-for="item in resultsFiltered" :key="item.id" class="px-3 m-3">
                 <div class="avatar">
