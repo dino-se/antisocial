@@ -30,12 +30,10 @@
           <h1 class="text-gray-600">@{{ items.username }}</h1>
         </span>
       </div>
-      <div>
-        <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
-          {{ following ? 'Unfollow' : 'Follow' }}
-        </button>
-        <button v-else class="btn">Edit Profile</button>
-      </div>
+      <button v-if="!cuser" @click="followToggle()" class="btn btn-info">
+        {{ following ? 'Unfollow' : 'Follow' }}
+      </button>
+      <button v-else class="btn">Edit Profile</button>
     </div>
     <div class="divider m-0 p-0"></div>
     <!-- <input type="text" v-model="items[0].user_id">
@@ -71,11 +69,11 @@
     <!-- Card -->
     <div class="overflow-auto h-dvh scrollbar-hide">
 
-    <div v-for="item in mepost" :key="item.id">
-      <div class="flex flex-col p-6 max-w-xl-2">
-        <div class="flex justify-between items-center">
+      <div v-for="item in mepost" :key="item.id">
+        <div class="flex flex-col p-6 max-w-xl-2">
+          <div class="flex justify-between items-center">
 
-          <!-- <div class="avatar">
+            <!-- <div class="avatar">
               <div class="w-8 rounded-full">
                 <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
               </div>
@@ -84,27 +82,27 @@
               </h2>
             </div> -->
 
-          <div class="avatar flex items-center">
-            <div class="w-12 h-12 rounded-full">
-              <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+            <div class="avatar flex items-center">
+              <div class="w-12 h-12 rounded-full">
+                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+              </div>
+              <div class="ml-3 text-lg">
+                <h1 class="card-details">
+                  <a :href="'profile.html?uid=' + item.user_id">{{ item.fullname }}</a>
+                </h1>
+                <span class="text-gray-600 break-normal">@{{ item.username }}</span>
+              </div>
             </div>
-            <div class="ml-3 text-lg">
-              <h1 class="card-details">
-                <a :href="'profile.html?uid=' + item.user_id">{{ item.fullname }}</a>
-              </h1>
-              <span class="text-gray-600 break-normal">@{{ item.username }}</span>
-            </div>
-          </div>
 
-          <details class="dropdown dropdown-end dropdownX">
-            <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
-            <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
-              <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
-              <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
-            </ul>
-          </details>
+            <details class="dropdown dropdown-end dropdownX">
+              <summary class="m-1 btn btn-ghost"><i class="material-icons">more_horiz</i></summary>
+              <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
+                <li class="text-info"><a @click="editContent(item.post_id)">Edit</a></li>
+                <li class="text-error"><a @click="deletePost(item.post_id)">Delete</a></li>
+              </ul>
+            </details>
 
-          <!-- <details class="dropdown dropdown-end">
+            <!-- <details class="dropdown dropdown-end">
               <summary class="btn btn-sm btn-primary">More</summary>
               <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-21">
                 <li class="text-primary"><a @click="editContent(item.post_id)">Edit</a></li>
@@ -112,9 +110,9 @@
               </ul>
             </details> -->
 
-        </div>
+          </div>
 
-        <!-- <div class="flex flex-col gap-2">
+          <!-- <div class="flex flex-col gap-2">
             <span class="text-center" v-if="!item.isEditing">{{ item.content }}</span>
             <div v-else>
               <input v-model="item.editedContent">
@@ -123,44 +121,44 @@
             </div>
           </div> -->
 
-        <div class="flex flex-col gap-2 py-4">
-          <p v-if="!item.isEditing">{{ item.content }}</p>
-          <div v-else>
-            <div class="w-full focus:outline-none" contenteditable="true"
-              @input="item.editedContent = $event.target.innerText">{{ item.editedContent }}</div>
-            <div class="float-end">
-              <button @click="saveEditedContent(item)" class="p-1 hover:text-success">Save</button>
-              <button @click="cancelEditContent(item)" class="p-1 hover:text-error">Cancel</button>
+          <div class="flex flex-col gap-2 py-4">
+            <p v-if="!item.isEditing">{{ item.content }}</p>
+            <div v-else>
+              <div class="w-full focus:outline-none" contenteditable="true"
+                @input="item.editedContent = $event.target.innerText">{{ item.editedContent }}</div>
+              <div class="float-end">
+                <button @click="saveEditedContent(item)" class="p-1 hover:text-success">Save</button>
+                <button @click="cancelEditContent(item)" class="p-1 hover:text-error">Cancel</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div v-if="item.filenames && item.filenames.length > 0">
-          <div class="carousel w-full rounded-box">
-            <template v-for="(filename, index) in item.filenames" :key="index">
-              <div :id="'slide'+ item.post_id + (index + 1)" class="carousel-item relative w-full">
-                <img v-if="filename" :src="'..' + filename" class="w-full">
-                <div v-if="item.filenames.length > 1"
-                  class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a :href="'#slide'+ item.post_id + ((index - 1 + item.filenames.length) % item.filenames.length + 1)"
-                    class="btn btn-circle"><i class="material-icons">chevron_left</i></a>
-                  <a :href="'#slide'+ item.post_id + ((index + 1) % item.filenames.length + 1)"
-                    class="btn btn-circle"><i class="material-icons">chevron_right</i></a>
+          <div v-if="item.filenames && item.filenames.length > 0">
+            <div class="carousel w-full rounded-box">
+              <template v-for="(filename, index) in item.filenames" :key="index">
+                <div :id="'slide'+ item.post_id + (index + 1)" class="carousel-item relative w-full">
+                  <img v-if="filename" :src="'..' + filename" class="w-full">
+                  <div v-if="item.filenames.length > 1"
+                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                    <a :href="'#slide'+ item.post_id + ((index - 1 + item.filenames.length) % item.filenames.length + 1)"
+                      class="btn btn-circle"><i class="material-icons">chevron_left</i></a>
+                    <a :href="'#slide'+ item.post_id + ((index + 1) % item.filenames.length + 1)"
+                      class="btn btn-circle"><i class="material-icons">chevron_right</i></a>
+                  </div>
                 </div>
-              </div>
-            </template>
+              </template>
+            </div>
+          </div>
+
+          <span class="text-gray-600">{{ item.created_at}}</span>
+
+          <div class="flex justify-between items-center p-3">
+            <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="flex items-center"><i
+                class="material-icons mr-2">forum</i> {{ item.comment_count }}</a>
           </div>
         </div>
-
-        <span class="text-gray-600">{{ item.created_at}}</span>
-
-        <div class="flex justify-between items-center p-3">
-          <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="flex items-center"><i
-              class="material-icons mr-2">forum</i> {{ item.comment_count }}</a>
-        </div>
+        <div class="divider m-0 p-0"></div>
       </div>
-      <div class="divider m-0 p-0"></div>
-    </div>
     </div>
 
   </div>
