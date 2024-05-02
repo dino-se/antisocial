@@ -11,32 +11,29 @@
   <script src="lib/session.js" async></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="lib/home.js" type="module"></script>
-  <script src="lib/nav.js" defer></script>
+  <script src="lib/main.js" defer></script>
 </head>
 
 <body>
-  <div class="flex h-screen w-full">
+  <div class="flex h-screen w-full" id="main">
     <div class="flex-auto w-96">
       <ul class="menu text-2xl place-content-center pt-5">
-        <div id="nav">
-          <li>
-            <a href="home.html" target="main-content"><i class="material-icons">home</i> Home</a>
-          </li>
-          <li>
-            <a onclick="x.showModal()"><i class="material-icons">create</i> Create</a>
-          </li>
-          <li>
-            <a href="search.html" target="main-content"><i class="material-icons">search</i> Search</a>
-          </li>
-          <li>
-            <a :href="'profile.html?uid='+uid" target="main-content"><i class="material-icons">account_circle</i>
-              Profile</a>
-          </li>
-          <li>
-            <a type="submit" onclick="signoutUser()"><i class="material-icons">logout</i> Logout</a>
-          </li>
-        </div>
+        <li>
+          <a href="home.html" target="main-content"><i class="material-icons">home</i> Home</a>
+        </li>
+        <li>
+          <a onclick="x.showModal()"><i class="material-icons">create</i> Create</a>
+        </li>
+        <li>
+          <a href="search.html" target="main-content"><i class="material-icons">search</i> Search</a>
+        </li>
+        <li>
+          <a :href="'profile.html?uid='+uid" target="main-content"><i class="material-icons">account_circle</i>
+            Profile</a>
+        </li>
+        <li>
+          <a type="submit" onclick="signoutUser()"><i class="material-icons">logout</i> Logout</a>
+        </li>
       </ul>
 
     </div>
@@ -50,7 +47,7 @@
 
     <div class="flex flex-col w-96">
 
-      <div class="p-6">
+      <div class="p-6 overflow-auto h-dvh">
         <!-- <label class="input input-bordered flex items-center gap-2">
                 <input type="text" class="grow" placeholder="Search" />
                 <i class="material-icons w-4 h-4 opacity-70">search</i>
@@ -68,56 +65,47 @@
             </a>
           </label>
         </div>
-        <div class="avatar pt-3">
-          <div class="w-10 h-10 rounded-full">
-            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+        <div v-for="item in sugg" :key="item.id">
+          <div class="avatar pt-3">
+            <div class="w-10 h-10 rounded-full">
+              <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+            </div>
+            <label class="text-lg">
+              <a :href="'profile.html?uid=' + item.user_id" target="main-content">
+                {{ item.fullname }}
+                <div class="text-gray-600">
+                  @{{ item.username }}
+                </div>
+              </a>
+            </label>
           </div>
-          <label class="text-lg">
-            <a href="profile.html?uid=30" target="main-content">Miyamoto Musashi
-              <div class="text-gray-600">
-                @miyamotomusashi
-              </div>
-            </a>
-          </label>
-        </div>
-        <div class="avatar pt-3">
-          <div class="w-10 h-10 rounded-full">
-            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-          </div>
-          <label class="text-lg">
-            <a href="profile.html?uid=30" target="main-content">Sasaki Kojiro
-              <div class="text-gray-600">
-                @sasaki
-              </div>
-            </a>
-          </label>
         </div>
 
       </div>
 
     </div>
 
-
-    <dialog id="x" onclose="clearMind()" class="modal modal-top px-96">
-      <div class="modal-box">
-        <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-        <div class="pt-6">
-          <form id="postForm">
-            <input type="hidden" name="imguid" id="imguid">
-            <textarea name="content" class="textarea textarea-bordered w-full P-6 "></textarea>
-            <div>
-              <input type="file" id="fileInput" name="img[]" accept="image/*" multiple
-                class="file-input file-input-bordered w-full">
-            </div>
-            <button class="btn btn-primary float-end ">POST</button>
-          </form>
-        </div>
-      </div>
-    </dialog>
-
   </div>
+
+  <dialog id="x" onclose="clearMind()" class="modal modal-top px-96">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="pt-6">
+        <form id="postForm">
+          <input type="hidden" name="imguid" id="imguid">
+          <textarea name="content" class="textarea textarea-bordered w-full P-6 "></textarea>
+          <div>
+            <input type="file" id="fileInput" name="img[]" accept="image/*" multiple
+              class="file-input file-input-bordered w-full">
+          </div>
+          <button class="btn btn-primary float-end ">POST</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
 
   <!-- <script src="lib/services/login.js"></script> -->
   <script src="lib/services/post.js"></script>
