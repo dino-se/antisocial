@@ -5,7 +5,7 @@ if(isset($_POST['email']) && isset($_POST['fullname'])
 && isset($_POST['username']) && isset($_POST['password'])) {
         $email = $_POST['email'];
         $fullname = $_POST['fullname'];
-        $username = $_POST['username'];
+        $username = strtolower($_POST['username']);
         $password = $_POST['password'];
 
     try {

@@ -44,7 +44,7 @@
     <div class="divider divider-horizontal m-0 p-0"></div>
 
     <div class="flex flex-col w-full">
-      <iframe src="home.html" name="main-content" frameborder="0" class="w-full h-full"></iframe>
+      <iframe src="home.html" name="main-content" id="main_content" frameborder="0" class="w-full h-full"></iframe>
     </div>
 
     <div class="divider divider-horizontal m-0 p-0"></div>
@@ -114,6 +114,35 @@
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
+      <form id="updateInfoForm">
+        <div class="avatar relative group">
+          <div class="w-24 rounded-full">
+            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" alt="Avatar Image" class="rounded-full">
+          </div>
+          <div class="absolute inset-0 rounded-full opacity-0 bg-black bg-opacity-50 transition-opacity duration-300 group-hover:opacity-100">
+            <i class="material-icons flex items-center justify-center h-24">edit</i>
+            <input type="file" accept="image/*" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+          </div>
+        </div>
+
+        <input type="hidden" id="logid" name="userid">
+        <label class="form-control">
+            <div class="label">
+                <span class="label-text">Fullname</span>
+            </div>
+
+            <input id="logname" name="fullname" class="input input-bordered" />
+        </label>
+        <label class="form-control pb-6">
+          <div class="label">
+              <span class="label-text">Username</span>
+          </div>
+
+          <input id="loguname" name="username" class="input input-bordered" />
+      </label>
+
+        <button class="btn btn-primary float-end">Save</button>
+    </form>
     </div>
   </dialog>
 
