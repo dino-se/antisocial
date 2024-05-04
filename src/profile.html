@@ -24,7 +24,7 @@
     <div class="flex justify-between items-center p-6">
       <div class="avatar flex items-center">
         <div class="w-24 rounded-full">
-          <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+          <img :src="'..' + items.profile_pic" />
         </div>
         <span class="m-3">
           <h1 class="font-bold text-xl">{{ items.fullname }}</h1>
@@ -86,7 +86,7 @@
             <a :href="'profile.html?uid=' + item.user_id">
               <div class="avatar container">
                 <div class="w-12 h-12 rounded-full">
-                  <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
+                  <img :src="'..' + item.profile_pic" />
                 </div>
                   <label class="text-lg pl-2">{{ item.fullname }}
                     <p class="text-gray-600 break-normal">@{{ item.username }}</p>

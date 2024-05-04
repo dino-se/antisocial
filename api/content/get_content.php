@@ -7,7 +7,7 @@ if(isset($_GET['cuid'])) {
 
     try {
         $query = "SELECT post.*,
-                users.user_id, users.fullname, users.username, 
+                users.user_id, users.fullname, users.username, users.profile_pic, 
                 image.filename, image.image_uid,
                 COUNT(comment.comment_id) AS comment_count
                 FROM post
