@@ -19,7 +19,7 @@ if(isset($_POST['userid']) && isset($_POST['username'])) {
         move_uploaded_file($_FILES['profile']['tmp_name'], $target_file);
         $target_file = str_replace("../", "/api/", $target_file);
 
-        $query = "UPDATE users SET fullname = :fname, username = :uname, profile_pic = :pic
+        $query = "UPDATE users SET fullname = :fname, username = :uname, profile_pic = IFNULL(:pic, profile_pic)
                   WHERE user_id = :uid";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':uid', $uid);
