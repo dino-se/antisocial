@@ -7,20 +7,32 @@ if(isset($_GET['cuid'])) {
 
     try {
         $query = "SELECT post.*,
-                users.user_id, users.fullname, users.username, users.profile_pic, 
-                image.filename, image.image_uid,
-                COUNT(likes.post_id) AS likes_count,
-                COUNT(comment.comment_id) AS comment_count
+                        users.user_id, 
+                        users.fullname, 
+                        users.username, 
+                        users.profile_pic, 
+                        image.filename, 
+                        image.image_uid,
+                        COALESCE(likes_count.count, 0) AS likes_count,
+                        COALESCE(comments_count.count, 0) AS comment_count
                 FROM post
                 INNER JOIN users ON post.user_id = users.user_id 
                 LEFT JOIN follows ON post.user_id = follows.following_id
                 LEFT JOIN image ON image.image_uid = post.image_uid
-                LEFT JOIN likes ON likes.post_id = post.post_id
-                LEFT JOIN comment ON comment.post_id = post.post_id
+                LEFT JOIN (
+                    SELECT post_id, COUNT(*) as count
+                    FROM likes
+                    GROUP BY post_id
+                ) AS likes_count ON likes_count.post_id = post.post_id
+                LEFT JOIN (
+                    SELECT post_id, COUNT(*) as count
+                    FROM comment
+                    GROUP BY post_id
+                ) AS comments_count ON comments_count.post_id = post.post_id
                 WHERE follows.follower_id = :fuid OR users.user_id = :cuid
                 GROUP BY post.post_id, users.user_id, users.fullname,
-                         users.username, image.filename, image.image_uid
-                ORDER BY post.post_id DESC";
+                        users.username, image.filename, image.image_uid
+                ORDER BY post.post_id DESC"; 
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':fuid', $fuid);
         $stmt->bindParam(':cuid', $cuid);
