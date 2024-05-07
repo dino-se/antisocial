@@ -42,6 +42,12 @@ const app = Vue.createApp({
             .then(() => {
                 location.reload();
             });
+        },
+        likePost(pid, uid) {
+            fetch(`../api/content/like_content.php?pid=${pid}&uid=${uid}`)
+            .then(() => {
+                location.reload();
+            });
         }
   }
 });

@@ -87,8 +87,8 @@
 
           <div class="flex justify-between items-center p-3">
             <div class="flex items-center">
-              <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id" class="flex items-center hover:text-error">
-                <i class="material-icons mr-2">favorite</i> {{ item.comment_count }}
+              <a @click="likePost(item.post_id, item.user_id)" class="flex items-center hover:text-error">
+                <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
               </a>
               <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"
                 class="flex items-center hover:text-primary ml-4">

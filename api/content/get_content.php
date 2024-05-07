@@ -9,11 +9,13 @@ if(isset($_GET['cuid'])) {
         $query = "SELECT post.*,
                 users.user_id, users.fullname, users.username, users.profile_pic, 
                 image.filename, image.image_uid,
+                COUNT(likes.post_id) AS likes_count,
                 COUNT(comment.comment_id) AS comment_count
                 FROM post
                 INNER JOIN users ON post.user_id = users.user_id 
                 LEFT JOIN follows ON post.user_id = follows.following_id
                 LEFT JOIN image ON image.image_uid = post.image_uid
+                LEFT JOIN likes ON likes.post_id = post.post_id
                 LEFT JOIN comment ON comment.post_id = post.post_id
                 WHERE follows.follower_id = :fuid OR users.user_id = :cuid
                 GROUP BY post.post_id, users.user_id, users.fullname,
