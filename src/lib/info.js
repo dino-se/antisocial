@@ -13,6 +13,7 @@ function getInfo() {
         document.getElementById('logid').value = res[0].user_id;
         document.getElementById('logname').value = res[0].fullname;
         document.getElementById('loguname').value = res[0].username;
+        document.getElementById('selectedImage').src = ".."+ res[0].profile_pic;
     });
 }
 
@@ -35,3 +36,18 @@ if (updateInfoForm) {
 } else {
     console.log("Not Found");
 }
+
+function displayImage() {
+    const input = document.getElementById('imageInput');
+    const image = document.getElementById('selectedImage');
+  
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+  
+      reader.onload = function(e) {
+        image.src = e.target.result;
+      };
+  
+      reader.readAsDataURL(input.files[0]);
+    }
+  }

@@ -117,11 +117,12 @@
       <form id="updateInfoForm">
         <div class="avatar relative group">
           <div class="w-24 rounded-full">
-            <img src="https://avatars.githubusercontent.com/u/133362311?v=4" alt="Avatar Image" class="rounded-full">
+            <img id="selectedImage" alt="Avatar Image" class="rounded-full">
           </div>
           <div class="absolute inset-0 rounded-full opacity-0 bg-black bg-opacity-50 transition-opacity duration-300 group-hover:opacity-100">
             <i class="material-icons flex items-center justify-center h-24">edit</i>
-            <input type="file" accept="image/*" name="profile" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+            <input type="file" accept="image/*" id="imageInput" name="profile" onchange="displayImage()"
+            class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"/>
           </div>
         </div>
 
