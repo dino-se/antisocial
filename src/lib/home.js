@@ -34,19 +34,25 @@ const app = Vue.createApp({
         saveEditedContent(item) {
             fetch(`../api/content/edit_content.php?postid=${item.post_id}&content=${item.editedContent}`)
                 .then(() => {
-                    location.reload();
+                    this.fetchPost();
                 });
         },
         deletePost(id) {
             fetch(`../api/content/delete_content.php?post_id=${id}`)
             .then(() => {
-                location.reload();
+                this.fetchPost();
             });
         },
         likePost(pid, uid) {
             fetch(`../api/content/like_content.php?pid=${pid}&uid=${uid}`)
             .then(() => {
-                location.reload();
+                this.fetchPost();
+            });
+        },
+        unlikePost(pid, uid) {
+            fetch(`../api/content/unlike_content.php?pid=${pid}&uid=${uid}`)
+            .then(() => {
+                this.fetchPost();
             });
         }
   }

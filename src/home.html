@@ -87,13 +87,13 @@
 
           <div class="flex justify-between items-center p-3">
             <div class="flex items-center">
-              <div v-if="item.likes_count < 1">
-                <a @click="likePost(item.post_id, item.user_id)" class="flex items-center cursor-pointer hover:text-error">
+              <div v-if="!item.likes_user_ids.includes(curuser)">
+                <a @click="likePost(item.post_id, curuser)" class="flex items-center cursor-pointer hover:text-error">
                   <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
                 </a>
               </div>
-              <div v-else>
-                <a @click="unlikePost(item.post_id, item.user_id)" class="flex items-center cursor-pointer text-error">
+              <div v-if="item.likes_user_ids.includes(curuser)">
+                <a @click="unlikePost(item.post_id, curuser)" class="flex items-center cursor-pointer text-error">
                   <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
                 </a>
               </div>

@@ -43,14 +43,14 @@ const app = Vue.createApp({
         saveEditedComment(item) {
             fetch(`../api/comment/edit_comment.php?cid=${item.comment_id}&comment=${item.editedComment}`)
                 .then(() => {
-                    location.reload();
+                    this.fetchComment();
                 });
         },
 
         deleteComment(id) {
             fetch(`../api/comment/delete_comment.php?cid=${id}`)
                 .then(() => {
-                    location.reload();
+                    this.fetchComment();
                 });
         }
     }

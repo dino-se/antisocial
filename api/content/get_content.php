@@ -13,6 +13,7 @@ if(isset($_GET['cuid'])) {
                         users.profile_pic, 
                         image.filename, 
                         image.image_uid,
+                        COALESCE(likes_count.likes_user_ids, '') AS likes_user_ids,
                         COALESCE(likes_count.count, 0) AS likes_count,
                         COALESCE(comments_count.count, 0) AS comment_count
                 FROM post
@@ -20,7 +21,10 @@ if(isset($_GET['cuid'])) {
                 LEFT JOIN follows ON post.user_id = follows.following_id
                 LEFT JOIN image ON image.image_uid = post.image_uid
                 LEFT JOIN (
-                    SELECT post_id, COUNT(*) as count
+                    SELECT 
+                        post_id, 
+                        GROUP_CONCAT(user_id) AS likes_user_ids,
+                        COUNT(*) AS count
                     FROM likes
                     GROUP BY post_id
                 ) AS likes_count ON likes_count.post_id = post.post_id
@@ -49,6 +53,8 @@ if(isset($_GET['cuid'])) {
             $groupedResult[$postId]['filenames'][] = $filename;
             unset($groupedResult[$postId]['filename']);
             unset($groupedResult[$postId]['image_id']);
+            
+            $groupedResult[$postId]['likes_user_ids'] = $row['likes_user_ids'] ? explode(',', $row['likes_user_ids']) : [];
         }
         $finalResult = array_values($groupedResult);
 
@@ -60,5 +66,4 @@ if(isset($_GET['cuid'])) {
 } else {
     echo json_encode(['error' => 'Missing reference']);
 }
-
 ?>
