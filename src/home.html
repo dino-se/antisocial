@@ -87,9 +87,16 @@
 
           <div class="flex justify-between items-center p-3">
             <div class="flex items-center">
-              <a @click="likePost(item.post_id, item.user_id)" class="flex items-center hover:text-error">
-                <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
-              </a>
+              <div v-if="item.likes_count < 1">
+                <a @click="likePost(item.post_id, item.user_id)" class="flex items-center cursor-pointer hover:text-error">
+                  <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
+                </a>
+              </div>
+              <div v-else>
+                <a @click="unlikePost(item.post_id, item.user_id)" class="flex items-center cursor-pointer text-error">
+                  <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
+                </a>
+              </div>
               <a :href="'comment.html?post=' + item.post_id + '&u=' + item.user_id"
                 class="flex items-center hover:text-primary ml-4">
                 <i class="material-icons mr-2">forum</i> {{ item.comment_count }}
