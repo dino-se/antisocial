@@ -93,7 +93,7 @@
                 </a>
               </div>
               <div v-if="item.likes_user_ids.includes(curuser)">
-                <a @click="unlikePost(item.post_id, curuser)" class="flex items-center cursor-pointer text-error">
+                <a @click="unlikePost(item.post_id, curuser)" class="flex items-center cursor-pointer text-error hover:text-gray-600">
                   <i class="material-icons mr-2">favorite</i> {{ item.likes_count }}
                 </a>
               </div>
