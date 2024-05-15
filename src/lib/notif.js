@@ -9,7 +9,7 @@ const notif = Vue.createApp({
     },
     methods: {
         getNotif() {
-            this.uid = localStorage.getItem('user_id');
+            const uid = localStorage.getItem('user_id');
             fetch(`../api/user/notif_user.php?uid=${uid}`)
             .then((data) => data.json())
             .then((res) => {

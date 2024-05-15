@@ -5,7 +5,9 @@ $uid = $_GET['uid'];
 
 try {
     $query = "SELECT likes.*, 
-                     users.fullname, users.user_id AS uidd,
+                     users.fullname,
+                     users.profile_pic,
+                     users.user_id AS uidd,
                      post.user_id AS kid
               FROM likes
               LEFT JOIN users ON users.user_id = likes.user_id
