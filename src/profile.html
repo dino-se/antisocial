@@ -21,7 +21,7 @@
       <i class="material-icons">keyboard_backspace</i>
     </button>
 
-    <div class="flex justify-between items-center p-6">
+    <div class="flex justify-between items-center pt-6 px-6">
       <div class="avatar flex items-center">
         <div class="w-24 rounded-full">
           <img :src="'..' + items.profile_pic" />
@@ -35,6 +35,15 @@
         {{ following ? 'Unfollow' : 'Follow' }}
       </button>
       <button v-else class="btn" onclick="changeInfo()">Edit Profile</button>
+    </div>
+    <div class="pb-3">
+      <div class="p-3">
+        <i class="material-icons">calendar_month</i>
+        Joined {{ items.date_created }}</div>
+      <div>
+        <a href="" class="p-3"><b>30</b> Following</a>
+        <a href="" class="p-3"><b>192.5K</b> Followers</a>
+      </div>
     </div>
     <div class="divider m-0 p-0"></div>
     <!-- <input type="text" v-model="items[0].user_id">
