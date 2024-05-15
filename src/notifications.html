@@ -18,7 +18,7 @@
     </div>
     <div class="divider m-0 p-0"></div>
     
-    <div id="notifa" class="overflow-auto h-dvh scrollbar-hide">
+    <div id="notifa" class="overflow-auto h-dvh">
         <div v-for="item in not" :key="item.id">
             <a :href="'profile.html?uid=' + item.user_id">
                 <div class="avatar flex items-center pt-3">
@@ -26,10 +26,10 @@
                     <img :src="'..' + item.profile_pic" />
                   </div>
                   <label class="text-lg pl-2"> {{ item.fullname }} like your post.
-                    <p class="text-gray-600">
-                      {{ item.date_like }}
-                    </p>
                   </label>
+                  <p class="text-gray-600">
+                    {{ item.date_like }}
+                  </p>
                 </div>
               </a>
         </div>
