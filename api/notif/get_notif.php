@@ -24,4 +24,3 @@ try {
 } catch (PDOException $th) {
     echo json_encode(['error' => $th->getMessage()]);
 }
-?>

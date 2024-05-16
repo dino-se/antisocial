@@ -22,11 +22,11 @@ const main = Vue.createApp({
             });
         },
         getAllNotif() {
-            fetch(`../api/user/notif_user.php?uid=${cuid}`)
-            .then((data) => data.json())
-            .then((res) => {
-                this.notiff = res[0].total_likes;
-            })
+            const eventSource = new EventSource(`../api/notif/count_notif.php?uid=${cuid}`);
+            eventSource.onmessage = event => {
+                const data = JSON.parse(event.data);
+                this.notiff = data.total_likes;
+              };
         }
     }
 });
