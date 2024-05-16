@@ -11,7 +11,8 @@ while (true) {
         $countQuery = "SELECT COUNT(*) AS total_likes 
                    FROM likes 
                    LEFT JOIN post ON post.post_id = likes.post_id 
-                   WHERE post.user_id = :uid AND likes.user_id != :uid";
+                   WHERE post.user_id = :uid AND likes.user_id != :uid
+                         AND status = 'unread'";
         $countStmt = $conn->prepare($countQuery);
         $countStmt->bindParam(':uid', $uid, PDO::PARAM_INT);
         $countStmt->execute();
