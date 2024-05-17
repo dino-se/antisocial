@@ -5,8 +5,10 @@ if(isset($_GET['uid'])) {
     $uid = $_GET['uid'];
 
     try {
-        $query = "SELECT * FROM users
-                  LEFT JOIN follows ON users.user_id = follows.follower_id
+        $query = "SELECT users.*,
+                    (SELECT COUNT(*) FROM follows WHERE follower_id = users.user_id) AS following_count,
+                    (SELECT COUNT(*) FROM follows WHERE following_id = users.user_id) AS follower_count
+                  FROM users
                   WHERE user_id = :uid";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':uid', $uid);
