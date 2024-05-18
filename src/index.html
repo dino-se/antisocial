@@ -32,6 +32,9 @@
           <a href="search.html" target="main-content"><i class="material-icons">search</i> Search</a>
         </li>
         <li>
+          <a href="messages.html" target="main-content"><i class="material-icons">email</i> Messages</a>
+        </li>
+        <li>
           <a href="notifications.html" target="main-content">
             <div class="indicator">
               <div v-if="notiff > 0" class="indicator-item badge badge-secondary">{{ notiff }}</div>
@@ -57,7 +60,7 @@
 
     <div class="divider divider-horizontal m-0 p-0"></div>
 
-    <div class="flex flex-col w-96">
+    <div class="hidden md:flex md:flex-col md:w-96 md:visible">
 
       <div class="p-6 overflow-auto h-dvh">
         <!-- <label class="input input-bordered flex items-center gap-2">
