@@ -31,7 +31,7 @@
             <a :href="'profile.html?uid=' + item.user_id">
               <div class="avatar container">
                 <div class="w-12 h-12 rounded-full">
-                  <img :src="'..' + item.profile_pic" />
+                  <img :src="'.' + item.profile_pic" />
                 </div>
                   <label class="text-lg pl-2">{{ item.fullname }}
                     <p class="text-gray-600 break-normal">@{{ item.username }}</p>
@@ -70,7 +70,7 @@
             <div class="carousel w-full rounded-box">
               <template v-for="(filename, index) in item.filenames" :key="index">
                 <div :id="'slide'+ item.post_id + (index + 1)" class="carousel-item relative group w-full">
-                  <img v-if="filename" :src="'..' + filename" class="w-full">
+                  <img v-if="filename" :src="'.' + filename" class="w-full">
                   <div v-if="item.filenames.length > 1"
                     class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <a :href="'#slide'+ item.post_id + ((index - 1 + item.filenames.length) % item.filenames.length + 1)"
