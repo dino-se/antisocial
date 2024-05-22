@@ -82,16 +82,6 @@
       <div v-for="item in mepost" :key="item.id">
         <div class="flex flex-col p-6 max-w-xl-2">
           <div class="flex justify-between items-center">
-
-            <!-- <div class="avatar">
-              <div class="w-8 rounded-full">
-                <img src="https://avatars.githubusercontent.com/u/133362311?v=4" />
-              </div>
-              <h2 class="card-details px-5"><a :href="'profile.html?uid='+item.user_id">{{ item.fullname }}</a> -
-                <span class="text-gray-600">{{ item.created_at}}</span>
-              </h2>
-            </div> -->
-
             <a :href="'profile.html?uid=' + item.user_id">
               <div class="avatar container">
                 <div class="w-12 h-12 rounded-full">
